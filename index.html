@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Inter:wght@300;400;600;700&display=swap');
-       
+      
         :root {
             --rigzone-blue: #002b5c;
             --rigzone-gold: #c5a059;
@@ -23,7 +23,7 @@
         .bg-rigzone { background-color: var(--rigzone-blue); }
         .text-rigzone { color: var(--rigzone-blue); }
         .border-gold { border-color: var(--rigzone-gold); }
-       
+      
         .btn-gold {
             background: linear-gradient(135deg, #c5a059 0%, #a38241 100%);
             color: white;
@@ -54,9 +54,8 @@
             transition: width 0.3s;
         }
         .nav-link-main:hover::after { width: 100%; }
-       
+      
         .spec-grid span { border-bottom: 1px dashed #e2e8f0; padding: 4px 0; font-size: 0.75rem; }
-
         /* MATURITY & BEAUTY ENHANCEMENTS */
         .mature-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -86,6 +85,52 @@
             .heading-font { font-size: 1.75rem; }
             .page-section { min-height: 100vh; }
             .product-grid-mobile { grid-template-columns: 1fr !important; }
+            
+            /* Enhanced mobile modals - scrollable + compact */
+            .modal-content {
+                max-height: 85vh;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .modal-header {
+                position: sticky;
+                top: 0;
+                background: white;
+                z-index: 10;
+                padding-bottom: 12px;
+                border-bottom: 1px solid #e5e7eb;
+            }
+            .modal-footer {
+                position: sticky;
+                bottom: 0;
+                background: white;
+                z-index: 10;
+                padding-top: 12px;
+                border-top: 1px solid #e5e7eb;
+            }
+            
+            /* Receipt modal - more compact on mobile */
+            #receipt-modal .modal-content {
+                max-height: 92vh;
+                padding: 20px 16px;
+            }
+            
+            /* Make nav scrollable on very small screens */
+            nav .container {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+        }
+        
+        /* Extra mobile safety for product modal buttons */
+        .product-modal-inner {
+            display: flex;
+            flex-direction: column;
+        }
+        @media (max-width: 640px) {
+            .product-modal-inner {
+                max-height: 85vh;
+            }
         }
     </style>
 </head>
@@ -110,7 +155,7 @@
                     <div class="cursor-pointer hover:text-blue-900" onclick="showOilPricesModal()">Oil Prices</div>
                 </div>
             </div>
-           
+          
             <div class="flex items-center space-x-6">
                 <div id="auth-links" class="flex items-center space-x-4">
                     <button onclick="showPage('login')" class="text-xs font-bold text-gray-700 hover:text-blue-900">SIGN IN</button>
@@ -143,13 +188,13 @@
         <h2 class="heading-font text-2xl font-bold tracking-[0.3em]">SECURE GATEWAY</h2>
         <p class="text-xs opacity-60 mt-2">ENCRYPTING PROCUREMENT DATA...</p>
     </div>
-
     <!-- MATURITY MODALS -->
     <!-- Product Detail Modal -->
     <div id="product-modal" onclick="if(event.target.id === 'product-modal')hideProductModal()" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center px-4">
-        <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden modal">
-            <div class="p-8">
-                <div class="flex justify-between items-start mb-6">
+        <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden modal modal-content">
+            <div class="product-modal-inner p-8">
+                <!-- Added sticky header for mobile -->
+                <div class="modal-header flex justify-between items-start mb-6">
                     <div>
                         <span id="modal-category" class="inline-block px-4 py-1 text-xs font-bold bg-rigzone text-gold rounded-full"></span>
                         <h1 id="modal-name" class="heading-font text-3xl font-bold mt-2"></h1>
@@ -174,16 +219,17 @@
                             <div class="flex justify-between border-b pb-2"><span class="font-medium">Lead Time</span><span class="font-bold text-emerald-600">Immediate Dispatch</span></div>
                             <div class="flex justify-between"><span class="font-medium">API / ISO Certified</span><span class="text-emerald-600">✓ YES</span></div>
                         </div>
-                        <div class="mt-10 flex gap-3">
-                            <button onclick="addToCartFromModal();hideProductModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Add to Procurement Cart</button>
-                            <button onclick="directBuyFromModal();hideProductModal()" class="flex-1 btn-gold py-4 font-bold uppercase text-sm">Buy Now • Secure Checkout</button>
-                        </div>
                     </div>
+                </div>
+                
+                <!-- Added sticky footer for mobile so buttons are always visible -->
+                <div class="modal-footer mt-8 flex gap-3 md:mt-10">
+                    <button onclick="addToCartFromModal();hideProductModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Add to Procurement Cart</button>
+                    <button onclick="directBuyFromModal();hideProductModal()" class="flex-1 btn-gold py-4 font-bold uppercase text-sm">Buy Now • Secure Checkout</button>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Notification Toast -->
     <div id="notification-toast" onclick="this.classList.add('hidden')" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-white shadow-2xl border border-gold rounded-3xl px-8 py-4 flex items-center gap-4 z-[300] toast">
         <i class="fas fa-check-circle text-3xl text-gold"></i>
@@ -192,10 +238,9 @@
             <p class="text-xs text-gray-400">Asset successfully added to your procurement list</p>
         </div>
     </div>
-
     <!-- Receipt Modal -->
     <div id="receipt-modal" onclick="if(event.target.id === 'receipt-modal')hideReceiptModal()" class="hidden fixed inset-0 bg-black/70 z-[250] flex items-center justify-center px-4">
-        <div class="bg-white max-w-2xl w-full rounded-3xl shadow-2xl modal relative">
+        <div class="bg-white max-w-2xl w-full rounded-3xl shadow-2xl modal modal-content">
             <div class="p-8">
                 <div class="flex justify-between mb-8">
                     <div>
@@ -206,12 +251,12 @@
                         <div class="receipt-stamp inline-block px-8 py-1 text-2xl font-bold tracking-widest">PAID • VERIFIED</div>
                     </div>
                 </div>
-                
+               
                 <h1 class="heading-font text-4xl font-bold text-rigzone mb-1">RECEIPT #RZ-<span id="receipt-order-id" class="font-mono"></span></h1>
                 <p class="text-xs text-gray-400 mb-8">April 09, 2026 • Lagos, Nigeria • Transaction Secured</p>
-                
+               
                 <div id="receipt-items" class="space-y-4 mb-8 border-t border-b py-6"></div>
-                
+               
                 <div class="flex justify-between text-sm mb-2">
                     <span class="font-medium">Subtotal</span>
                     <span id="receipt-subtotal" class="font-bold"></span>
@@ -224,42 +269,41 @@
                     <span>TOTAL PAID</span>
                     <span id="receipt-total"></span>
                 </div>
-                
+               
                 <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-xs text-emerald-700 mb-8">
                     Thank you for your procurement with Rigzone. All assets are now under 24-month performance warranty and 180-day buy-back guarantee. A digital copy has been sent to your corporate email.
                 </div>
-                
-                <div class="flex gap-3">
+               
+                <!-- Sticky footer for receipt buttons on mobile -->
+                <div class="modal-footer flex gap-3">
                     <button onclick="emailReceipt()" class="flex-1 py-4 btn-gold font-bold uppercase text-sm">Email Receipt to rigzone.office@gmail.com</button>
                     <button onclick="hideReceiptModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Close Receipt</button>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Investor, HSE, ESG quick modals (minimal) -->
     <div id="investor-modal" onclick="if(event.target.id === 'investor-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center">
-        <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal"> 
+        <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal">
             <h2 class="heading-font text-3xl font-bold mb-6">Q1 2026 Investor Update</h2>
             <p class="text-sm leading-relaxed">Rigzone closed the quarter with $2.4B in equipment transactions. New Lagos regional hub operational. Projected 2026 revenue growth: 38%.</p>
             <button onclick="document.getElementById('investor-modal').classList.add('hidden')" class="mt-8 w-full py-4 btn-gold">Download Full Report</button>
         </div>
     </div>
     <div id="hse-modal" onclick="if(event.target.id === 'hse-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center">
-        <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal"> 
+        <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal">
             <h2 class="heading-font text-3xl font-bold mb-6">HSE Policy 2026</h2>
             <p class="text-sm leading-relaxed">Zero-incident target achieved for 2025. All listed equipment meets or exceeds IADC, API Q1 and ISO 45001 standards.</p>
             <button onclick="document.getElementById('hse-modal').classList.add('hidden')" class="mt-8 w-full py-4 btn-gold">View Full HSE Manual</button>
         </div>
     </div>
     <div id="esg-modal" onclick="if(event.target.id === 'esg-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center">
-        <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal"> 
+        <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal">
             <h2 class="heading-font text-3xl font-bold mb-6">ESG Performance 2025</h2>
             <p class="text-sm leading-relaxed">Carbon-neutral operations achieved in all 6 global yards. 100% of equipment listings include recycled material disclosure.</p>
             <button onclick="document.getElementById('esg-modal').classList.add('hidden')" class="mt-8 w-full py-4 btn-gold">Download ESG Report</button>
         </div>
     </div>
-
     <!-- Oil Prices Modal -->
     <div id="oil-prices-modal" onclick="if(event.target.id === 'oil-prices-modal')hideOilPricesModal()" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center px-4">
         <div class="bg-white rounded-3xl max-w-md w-full p-8 modal">
@@ -272,9 +316,7 @@
             <button onclick="hideOilPricesModal()" class="mt-10 w-full py-4 btn-gold">Close Live Feed</button>
         </div>
     </div>
-
     <main class="container mx-auto px-4 py-10">
-
         <section id="page-home" class="page-section active">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 <div class="lg:col-span-3">
@@ -333,7 +375,6 @@
                 </div>
             </div>
         </section>
-
         <section id="page-equipment" class="page-section">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b-2 border-gray-200 pb-6">
                 <div>
@@ -348,7 +389,6 @@
             <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 product-grid-mobile">
                 </div>
         </section>
-
         <section id="page-history" class="page-section">
             <div class="max-w-4xl mx-auto">
                 <div class="relative h-96 mb-12 rounded overflow-hidden">
@@ -360,7 +400,7 @@
                 <div class="prose prose-lg text-gray-700 space-y-6">
                     <h2 class="text-2xl font-bold text-rigzone border-l-4 border-gold pl-4 uppercase heading-font">Engineering Excellence Since 1999</h2>
                     <p>Founded in Houston, Texas, RIGZONE began with a singular mission: to digitize the energy supply chain. What started as a recruitment portal for offshore workers evolved into the world's most trusted marketplace for multi-million dollar engineering assets.</p>
-                   
+                  
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
                         <div class="text-center">
                             <h3 class="text-4xl font-bold text-gold">$40B+</h3>
@@ -376,7 +416,7 @@
                         </div>
                     </div>
                     <p>Today, our procurement division oversees the movement of drilling rigs, heavy pipeline infrastructure, and subsea exploration modules across six continents. Every piece of equipment in our inventory undergoes a 48-point technical validation before listing.</p>
-                    
+                   
                     <!-- Enhanced Timeline -->
                     <div class="mt-16 border-l-4 border-gold pl-8 space-y-12">
                         <div class="flex gap-8"><div class="font-bold w-20 shrink-0">1999</div><div>Company founded in Houston with first digital rig auction platform.</div></div>
@@ -387,7 +427,6 @@
                 </div>
             </div>
         </section>
-
         <!-- Enhanced placeholder pages with more details -->
         <section id="page-jobs" class="page-section">
             <div class="max-w-5xl mx-auto text-center py-12">
@@ -403,7 +442,6 @@
                 <button onclick="showPage('home')" class="mt-12 px-10 py-4 border-2 border-gold text-gold font-bold uppercase">Return to Dashboard</button>
             </div>
         </section>
-
         <section id="page-news" class="page-section">
             <div class="max-w-5xl mx-auto py-12">
                 <h2 class="heading-font text-4xl font-bold mb-8 text-center">GLOBAL ENERGY NEWS • LIVE UPDATES</h2>
@@ -422,7 +460,6 @@
                 <button onclick="showPage('home')" class="mt-12 block mx-auto px-10 py-4 border-2 border-gold text-gold font-bold uppercase">Return to Dashboard</button>
             </div>
         </section>
-
         <section id="page-training" class="page-section">
             <div class="max-w-5xl mx-auto py-12">
                 <h2 class="heading-font text-4xl font-bold mb-4 text-center">TECHNICAL CERTIFICATION &amp; ACADEMY</h2>
@@ -450,7 +487,6 @@
                 <button onclick="showPage('home')" class="mt-12 block mx-auto px-10 py-4 border-2 border-gold text-gold font-bold uppercase">Return to Dashboard</button>
             </div>
         </section>
-
         <section id="page-events" class="page-section">
             <div class="max-w-5xl mx-auto py-12">
                 <h2 class="heading-font text-4xl font-bold mb-4 text-center">GLOBAL EVENTS &amp; EXHIBITIONS 2026</h2>
@@ -467,7 +503,6 @@
                 <button onclick="showPage('home')" class="mt-12 block mx-auto px-10 py-4 border-2 border-gold text-gold font-bold uppercase">Return to Dashboard</button>
             </div>
         </section>
-
         <section id="page-cart" class="page-section">
             <h1 class="heading-font text-4xl font-bold mb-10 text-rigzone">Procurement Cart History</h1>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -485,7 +520,6 @@
                 </div>
             </div>
         </section>
-
         <section id="page-login" class="page-section">
             <div class="max-w-md mx-auto bg-white p-10 shadow-2xl rounded border-t-8 border-rigzone">
                 <div class="text-center mb-10">
@@ -509,7 +543,6 @@
                 </div>
             </div>
         </section>
-
         <section id="page-payment" class="page-section">
             <div class="max-w-4xl mx-auto bg-white p-12 shadow-2xl border rounded relative">
                 <div class="absolute top-0 right-0 p-8 text-gray-100 font-bold text-8xl pointer-events-none opacity-10 uppercase">Invoice</div>
@@ -555,7 +588,6 @@
             </div>
         </section>
     </main>
-
     <footer class="bg-rigzone text-white pt-20 pb-10 border-t-8 border-gold mt-20">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
             <div>
@@ -585,7 +617,7 @@
                 </div>
             </div>
         </div>
-        
+       
         <!-- SOCIAL MEDIA BAR (NEW) -->
         <div class="container mx-auto px-4 mt-12 border-t border-blue-900 pt-8 flex flex-wrap justify-center items-center gap-x-8 text-3xl text-blue-200">
             <a href="https://linkedin.com/company/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-linkedin"></i></a>
@@ -595,12 +627,11 @@
             <a href="https://facebook.com/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-facebook"></i></a>
             <span class="text-xs uppercase tracking-[1px] text-blue-300 ml-4">Follow Rigzone Worldwide</span>
         </div>
-        
+       
         <div class="container mx-auto px-4 border-t border-blue-900 mt-8 pt-10 text-center text-[10px] text-blue-400 font-bold uppercase tracking-[0.2em]">
             © 2026 RIGZONE WORLDWIDE. ALL RIGHTS RESERVED. SECURE INDUSTRIAL SUPPLY DIVISION.
         </div>
     </footer>
-
     <div class="fixed bottom-10 right-10 z-[60]">
         <button onclick="toggleChat()" class="bg-rigzone border-2 border-gold text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition duration-300">
             <i class="fas fa-headset text-2xl"></i>
@@ -622,7 +653,6 @@
             </div>
         </div>
     </div>
-
     <script>
         // --- 30 PRODUCT DATASET (unchanged from your code) ---
         const products = [
@@ -657,21 +687,18 @@
             { id: 29, name: "Industrial Water Filtration Plant", price: 890000, category: "Maintenance", image: "https://i.pinimg.com/1200x/2e/00/55/2e00554b498707c4b691d86a52e55a54.jpg", specs: "OSHA Grade" },
             { id: 30, name: "Pulsar PDC Drill Bit - 6 Inch Range", price: 81000, category: "Tooling", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK0RnI9tt6HmvNBcLA9szy2PHBUAavSqZoig&s", specs: "Hard Rock Spec" }
         ];
-
         let currentUser = JSON.parse(localStorage.getItem('rigzone_user')) || null;
         let cart = JSON.parse(localStorage.getItem('rigzone_cart')) || [];
-
         // --- NAVIGATION ENGINE ---
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
             const target = document.getElementById('page-' + pageId);
             if(target) target.classList.add('active');
             window.scrollTo({top: 0, behavior: 'smooth'});
-           
+          
             if(pageId === 'equipment') renderProducts(products);
             if(pageId === 'cart') renderCart();
         }
-
         // --- AUTH & ACCOUNT ---
         function handleLogin(e) {
             e.preventDefault();
@@ -698,7 +725,6 @@
             }
             updateCartCount();
         }
-
         // --- INVENTORY ENGINE (now with clickable mature cards) ---
         function renderProducts(items) {
             const grid = document.getElementById('product-grid');
@@ -723,18 +749,16 @@
                 </div>
             `).join('');
         }
-
         function filterProducts() {
             const term = document.getElementById('search-bar').value.toLowerCase();
             const filtered = products.filter(p => p.name.toLowerCase().includes(term) || p.category.toLowerCase().includes(term));
             renderProducts(filtered);
         }
-
         // --- PRODUCT DETAIL MODAL ---
         function showProductDetail(id) {
             const p = products.find(item => item.id === id);
             if (!p) return;
-            
+           
             document.getElementById('modal-name').innerText = p.name;
             document.getElementById('modal-category').innerText = p.category;
             document.getElementById('modal-image').src = p.image;
@@ -745,38 +769,35 @@
             document.getElementById('product-modal').classList.remove('hidden');
             document.getElementById('product-modal').style.display = 'flex';
         }
-        
+       
         function hideProductModal() {
             const modal = document.getElementById('product-modal');
             modal.classList.add('hidden');
             modal.style.display = 'none';
         }
-
         function addToCartFromModal() {
             if (!selectedProduct) return; // fallback
             addToCart(selectedProduct.id);
         }
-        
+       
         function directBuyFromModal() {
             if (!selectedProduct) return;
             directBuy(selectedProduct.id);
         }
-
         // --- BEAUTIFUL NOTIFICATION SYSTEM (replaces plain alerts) ---
         let selectedProduct = null;
-        
+       
         function showNotification(message) {
             const toast = document.getElementById('notification-toast');
             document.getElementById('toast-message').innerHTML = `<span class="text-xl">✓</span> ${message}`;
             toast.classList.remove('hidden');
             toast.style.display = 'flex';
-            
+           
             setTimeout(() => {
                 toast.classList.add('hidden');
                 toast.style.display = 'none';
             }, 3200);
         }
-
         // --- PROCUREMENT LOGIC ---
         function addToCart(id) {
             if(!currentUser) return showPage('login');
@@ -787,14 +808,12 @@
             saveCart();
             showNotification(`ASSET #${id} ADDED TO PROCUREMENT LIST`);
         }
-
         function directBuy(id) {
             if(!currentUser) return showPage('login');
             cart = [];
             addToCart(id);
             showPage('cart');
         }
-
         function renderCart() {
             const container = document.getElementById('cart-items-container');
             if(cart.length === 0) {
@@ -821,7 +840,6 @@
             `).join('');
             updateTotals();
         }
-
         function updateQty(id, delta) {
             const item = cart.find(c => c.id === id);
             item.qty += delta;
@@ -829,29 +847,24 @@
             saveCart();
             renderCart();
         }
-
         function removeItem(id) {
             cart = cart.filter(c => c.id !== id);
             saveCart();
             renderCart();
         }
-
         function updateTotals() {
             const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             document.getElementById('cart-subtotal').innerText = `$${total.toLocaleString()}`;
             document.getElementById('cart-total').innerText = `$${total.toLocaleString()}`;
             updateCartCount();
         }
-
         function saveCart() {
             localStorage.setItem('rigzone_cart', JSON.stringify(cart));
             updateCartCount();
         }
-
         function updateCartCount() {
             document.getElementById('cart-count').innerText = cart.length;
         }
-
         // --- CHECKOUT & SETTLEMENT ---
         function processToCheckout() {
             if(cart.length === 0) return showNotification("Procurement cart is empty.");
@@ -862,7 +875,6 @@
                 initPaymentPage();
             }, 3000);
         }
-
         function initPaymentPage() {
             const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             document.getElementById('order-id').innerText = Date.now().toString().slice(-6);
@@ -872,17 +884,16 @@
             document.getElementById('bank-swift').innerText = "RIGZUS33HOU";
             showPage('payment');
         }
-
         function confirmPayment() {
             // Show styled receipt instead of plain alert
             const orderId = document.getElementById('order-id').innerText;
             const total = document.getElementById('pay-amount').innerText;
-            
+           
             // Populate receipt
             document.getElementById('receipt-order-id').innerText = orderId;
             document.getElementById('receipt-subtotal').innerText = total;
             document.getElementById('receipt-total').innerText = total;
-            
+           
             const receiptContainer = document.getElementById('receipt-items');
             receiptContainer.innerHTML = cart.map(item => `
                 <div class="flex justify-between items-center text-sm">
@@ -890,23 +901,21 @@
                     <div class="font-bold">$${(item.price * item.qty).toLocaleString()}</div>
                 </div>
             `).join('');
-            
+           
             document.getElementById('receipt-modal').classList.remove('hidden');
             document.getElementById('receipt-modal').style.display = 'flex';
-            
+           
             // Clear cart after successful payment demo
             cart = [];
             saveCart();
             renderCart();
         }
-
         function hideReceiptModal() {
             const modal = document.getElementById('receipt-modal');
             modal.classList.add('hidden');
             modal.style.display = 'none';
             showPage('home');
         }
-
         function emailReceipt() {
             const orderId = document.getElementById('receipt-order-id').innerText;
             const amount = document.getElementById('receipt-total').innerText;
@@ -915,7 +924,6 @@
             hideReceiptModal();
             showNotification("Receipt emailed to rigzone.office@gmail.com");
         }
-
         // --- LIVE SUPPORT ---
         function toggleChat() {
             document.getElementById('chat-box').classList.toggle('hidden');
@@ -931,7 +939,6 @@
                 msgBox.scrollTop = msgBox.scrollHeight;
             }, 1000);
         }
-
         // --- SIDEBAR LOADING ---
         const eventData = [
             { date: "APR 22", title: "Offshore Technology Conference (OTC)", loc: "Houston, TX" },
@@ -949,14 +956,12 @@
                 </div>
             </div>
         `).join('');
-
         // Modal helpers
         function showInvestorModal() { document.getElementById('investor-modal').classList.remove('hidden'); }
         function showHSModal() { document.getElementById('hse-modal').classList.remove('hidden'); }
         function showESGModal() { document.getElementById('esg-modal').classList.remove('hidden'); }
         function showOilPricesModal() { document.getElementById('oil-prices-modal').classList.remove('hidden'); }
         function hideOilPricesModal() { document.getElementById('oil-prices-modal').classList.add('hidden'); }
-
         // INITIALIZE
         updateAuthUI();
     </script>
