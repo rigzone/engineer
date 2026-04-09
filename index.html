@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Inter:wght@300;400;600;700&display=swap');
-    
+   
         :root {
             --rigzone-blue: #002b5c;
             --rigzone-gold: #c5a059;
@@ -18,13 +18,12 @@
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
             color: #334155;
-            overflow-x: hidden;
         }
         .heading-font { font-family: 'Roboto Condensed', sans-serif; }
         .bg-rigzone { background-color: var(--rigzone-blue); }
         .text-rigzone { color: var(--rigzone-blue); }
         .border-gold { border-color: var(--rigzone-gold); }
-    
+   
         .btn-gold {
             background: linear-gradient(135deg, #c5a059 0%, #a38241 100%);
             color: white;
@@ -55,7 +54,7 @@
             transition: width 0.3s;
         }
         .nav-link-main:hover::after { width: 100%; }
-    
+   
         .spec-grid span { border-bottom: 1px dashed #e2e8f0; padding: 4px 0; font-size: 0.75rem; }
         /* MATURITY & BEAUTY ENHANCEMENTS */
         .mature-card {
@@ -86,7 +85,7 @@
             .heading-font { font-size: 1.75rem; }
             .page-section { min-height: 100vh; }
             .product-grid-mobile { grid-template-columns: 1fr !important; }
-            
+           
             /* Ultra-clean mobile modals - full comfort, no wasted space */
             .modal-content {
                 max-height: 92vh;
@@ -114,13 +113,13 @@
                 margin: 0 -32px;
                 padding: 16px 32px;
             }
-            
+           
             /* Receipt modal - perfectly fitted on phone */
             #receipt-modal .modal-content {
                 max-height: 94vh;
                 padding: 24px 20px;
             }
-            
+           
             /* Payment page - amount and wire details now fit perfectly */
             .wire-pay-header {
                 font-size: 1.1rem;
@@ -132,117 +131,28 @@
                 margin-bottom: 16px;
             }
             .payment-total {
-                font-size: 1.9rem !important;
+                font-size: 2.25rem !important;
                 line-height: 1;
             }
-            
+           
             /* Cart quantity controls - fully visible on phone */
             .cart-qty-control {
                 padding: 4px 8px;
                 font-size: 0.875rem;
             }
-            
+           
             /* Product modal grid items - smaller text so everything fits */
             .product-spec-grid {
                 font-size: 0.7rem;
             }
-            
+           
             /* Nav becomes clean on tiny screens */
             nav .container {
                 padding-left: 8px;
                 padding-right: 8px;
             }
-
-            /* NEW MOBILE FIXES ADDED BELOW */
-
-            /* 1. Search bar - full width, no overflow */
-            #search-bar {
-                width: 100% !important;
-                max-width: none;
-            }
-
-            /* 2. Product modal - serial / condition / warranty now fully visible */
-            .product-spec-grid {
-                grid-template-columns: 1fr !important;
-                gap: 10px !important;
-                font-size: 0.68rem !important;
-                padding: 0;
-            }
-            .product-spec-grid > div {
-                padding: 10px 8px !important;
-                min-height: auto;
-            }
-
-            /* 3. Cart items - no overflow, qty +/- and delete fully visible */
-            .cart-item {
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                gap: 12px !important;
-                padding: 16px !important;
-            }
-            .cart-item img {
-                width: 68px !important;
-                height: 68px !important;
-                flex-shrink: 0;
-            }
-            .cart-item .flex-grow {
-                width: 100%;
-            }
-            .cart-item .flex.items-center.space-x-4 {
-                width: 100%;
-                justify-content: space-between;
-                margin-top: 8px;
-            }
-            .cart-qty-control {
-                padding: 3px 10px !important;
-                font-size: 0.95rem !important;
-                min-width: 110px;
-            }
-            .cart-qty-control button {
-                padding: 0 12px !important;
-            }
-
-            /* 4. Payment & Receipt amounts - compressed, smaller, fully visible without horizontal scroll */
-            .payment-total {
-                font-size: 1.85rem !important;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            #receipt-modal .flex.justify-between.text-2xl.font-bold {
-                font-size: 1.65rem !important;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            #receipt-total,
-            #receipt-subtotal {
-                font-size: 1.65rem !important;
-            }
-            #cart-total,
-            #cart-subtotal {
-                font-size: 1.75rem !important;
-            }
-
-            /* 5. Bank details in payment - wrap & smaller on tiny screens */
-            .bg-gray-50.p-6.rounded.border.space-y-4.text-xs {
-                font-size: 0.78rem !important;
-                line-height: 1.3;
-            }
-
-            /* 6. Global safety - no horizontal scroll anywhere */
-            * {
-                box-sizing: border-box;
-            }
-            main, .container, .modal-content, section {
-                max-width: 100% !important;
-                overflow-x: hidden !important;
-            }
-            .flex.justify-between {
-                gap: 8px;
-            }
         }
-        
+       
         /* Extra mobile safety for product modal buttons */
         .product-modal-inner {
             display: flex;
@@ -251,6 +161,53 @@
         @media (max-width: 640px) {
             .product-modal-inner {
                 max-height: 92vh;
+            }
+        }
+
+        /* === FINAL RECEIPT FIX - FULLY VISIBLE ON PHONE WITHOUT SCROLLING LEFT/RIGHT === */
+        @media (max-width: 640px) {
+            #receipt-modal .modal-content {
+                max-height: 96vh !important;
+                padding: 20px 16px !important;
+                width: calc(100% - 24px) !important;
+            }
+            
+            /* Make the big TOTAL PAID amount smaller and wrap cleanly */
+            #receipt-total {
+                font-size: 1.85rem !important;
+                line-height: 1.1 !important;
+                letter-spacing: -1px;
+                word-break: break-all;
+            }
+            
+            /* Receipt subtotal also compressed */
+            #receipt-subtotal {
+                font-size: 1.1rem !important;
+            }
+            
+            /* Receipt stamp smaller and less rotated so it fits */
+            .receipt-stamp {
+                font-size: 1.35rem !important;
+                padding: 4px 14px !important;
+                transform: rotate(-6deg) !important;
+            }
+            
+            /* Receipt items list - tighter spacing */
+            #receipt-items {
+                font-size: 0.9rem !important;
+                line-height: 1.3;
+            }
+            
+            /* Force all flex rows to stay on screen */
+            #receipt-modal .flex {
+                flex-wrap: wrap;
+            }
+            
+            /* No horizontal overflow anywhere */
+            #receipt-modal * {
+                max-width: 100%;
+                overflow-x: hidden;
+                word-wrap: break-word;
             }
         }
     </style>
@@ -276,7 +233,7 @@
                     <div class="cursor-pointer hover:text-blue-900" onclick="showOilPricesModal()">Oil Prices</div>
                 </div>
             </div>
-        
+       
             <div class="flex items-center space-x-6">
                 <div id="auth-links" class="flex items-center space-x-4">
                     <button onclick="showPage('login')" class="text-xs font-bold text-gray-700 hover:text-blue-900">SIGN IN</button>
@@ -309,11 +266,12 @@
         <h2 class="heading-font text-2xl font-bold tracking-[0.3em]">SECURE GATEWAY</h2>
         <p class="text-xs opacity-60 mt-2">ENCRYPTING PROCUREMENT DATA...</p>
     </div>
-
+    <!-- MATURITY MODALS -->
     <!-- Product Detail Modal -->
     <div id="product-modal" onclick="if(event.target.id === 'product-modal')hideProductModal()" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center px-4">
         <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden modal modal-content">
             <div class="product-modal-inner p-8">
+                <!-- Sticky header for mobile -->
                 <div class="modal-header flex justify-between items-start mb-6">
                     <div>
                         <span id="modal-category" class="inline-block px-4 py-1 text-xs font-bold bg-rigzone text-gold rounded-full"></span>
@@ -341,6 +299,8 @@
                         </div>
                     </div>
                 </div>
+             
+                <!-- Sticky footer for mobile so buttons are always visible and comfortable -->
                 <div class="modal-footer mt-8 flex gap-3 md:mt-10">
                     <button onclick="addToCartFromModal();hideProductModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Add to Procurement Cart</button>
                     <button onclick="directBuyFromModal();hideProductModal()" class="flex-1 btn-gold py-4 font-bold uppercase text-sm">Buy Now • Secure Checkout</button>
@@ -348,7 +308,6 @@
             </div>
         </div>
     </div>
-
     <!-- Notification Toast -->
     <div id="notification-toast" onclick="this.classList.add('hidden')" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-white shadow-2xl border border-gold rounded-3xl px-8 py-4 flex items-center gap-4 z-[300] toast">
         <i class="fas fa-check-circle text-3xl text-gold"></i>
@@ -357,7 +316,6 @@
             <p class="text-xs text-gray-400">Asset successfully added to your procurement list</p>
         </div>
     </div>
-
     <!-- Receipt Modal -->
     <div id="receipt-modal" onclick="if(event.target.id === 'receipt-modal')hideReceiptModal()" class="hidden fixed inset-0 bg-black/70 z-[250] flex items-center justify-center px-4">
         <div class="bg-white max-w-2xl w-full rounded-3xl shadow-2xl modal modal-content">
@@ -371,12 +329,12 @@
                         <div class="receipt-stamp inline-block px-8 py-1 text-2xl font-bold tracking-widest">PAID • VERIFIED</div>
                     </div>
                 </div>
-             
+            
                 <h1 class="heading-font text-4xl font-bold text-rigzone mb-1">RECEIPT #RZ-<span id="receipt-order-id" class="font-mono"></span></h1>
                 <p class="text-xs text-gray-400 mb-8">April 09, 2026 • Houston, Texas • Transaction Secured</p>
-             
+            
                 <div id="receipt-items" class="space-y-4 mb-8 border-t border-b py-6"></div>
-             
+            
                 <div class="flex justify-between text-sm mb-2">
                     <span class="font-medium">Subtotal</span>
                     <span id="receipt-subtotal" class="font-bold"></span>
@@ -385,15 +343,16 @@
                     <span class="font-medium">Global Logistics (FOB)</span>
                     <span class="text-emerald-600 font-bold">COMPLIMENTARY</span>
                 </div>
-                <div class="flex justify-between border-t pt-6 mt-6 text-2xl font-bold text-rigzone">
+                <div class="flex justify-between text-sm mb-8 border-t pt-6 text-2xl font-bold text-rigzone">
                     <span>TOTAL PAID</span>
                     <span id="receipt-total"></span>
                 </div>
-             
+            
                 <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-xs text-emerald-700 mb-8">
                     Thank you for your procurement with Rigzone. All assets are now under 24-month performance warranty and 180-day buy-back guarantee. A digital copy has been sent to your corporate email.
                 </div>
-             
+            
+                <!-- Sticky footer for receipt buttons on mobile -->
                 <div class="modal-footer flex gap-3">
                     <button onclick="emailReceipt()" class="flex-1 py-4 btn-gold font-bold uppercase text-sm">Email Receipt to rigzone.office@gmail.com</button>
                     <button onclick="hideReceiptModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Close Receipt</button>
@@ -401,8 +360,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Investor, HSE, ESG quick modals -->
+    <!-- Investor, HSE, ESG quick modals (minimal) -->
     <div id="investor-modal" onclick="if(event.target.id === 'investor-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center">
         <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal">
             <h2 class="heading-font text-3xl font-bold mb-6">Q1 2026 Investor Update</h2>
@@ -424,7 +382,6 @@
             <button onclick="document.getElementById('esg-modal').classList.add('hidden')" class="mt-8 w-full py-4 btn-gold">Download ESG Report</button>
         </div>
     </div>
-
     <!-- Oil Prices Modal -->
     <div id="oil-prices-modal" onclick="if(event.target.id === 'oil-prices-modal')hideOilPricesModal()" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center px-4">
         <div class="bg-white rounded-3xl max-w-md w-full p-8 modal">
@@ -437,9 +394,7 @@
             <button onclick="hideOilPricesModal()" class="mt-10 w-full py-4 btn-gold">Close Live Feed</button>
         </div>
     </div>
-
     <main class="container mx-auto px-4 py-10">
-        <!-- All original sections remain unchanged - only mobile fixes added via CSS above -->
         <section id="page-home" class="page-section active">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 <div class="lg:col-span-3">
@@ -492,12 +447,12 @@
                     </div>
                     <div class="bg-white border p-6 shadow-sm">
                         <h3 class="heading-font font-bold mb-4 uppercase text-sm">Upcoming Summits</h3>
-                        <div class="space-y-4" id="sidebar-events"></div>
+                        <div class="space-y-4" id="sidebar-events">
+                            </div>
                     </div>
                 </div>
             </div>
         </section>
-
         <section id="page-equipment" class="page-section">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b-2 border-gray-200 pb-6">
                 <div>
@@ -509,12 +464,9 @@
                     <i class="fas fa-search absolute left-3 top-4 text-gray-400"></i>
                 </div>
             </div>
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 product-grid-mobile"></div>
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 product-grid-mobile">
+                </div>
         </section>
-
-        <!-- All other sections (history, jobs, news, training, events, cart, login, payment) remain 100% unchanged -->
-        <!-- They are intentionally kept exactly as in the original code so nothing is removed -->
-
         <section id="page-history" class="page-section">
             <div class="max-w-4xl mx-auto">
                 <div class="relative h-96 mb-12 rounded overflow-hidden">
@@ -526,6 +478,7 @@
                 <div class="prose prose-lg text-gray-700 space-y-6">
                     <h2 class="text-2xl font-bold text-rigzone border-l-4 border-gold pl-4 uppercase heading-font">Engineering Excellence Since 1999</h2>
                     <p>Founded in Houston, Texas, RIGZONE began with a singular mission: to digitize the energy supply chain. What started as a recruitment portal for offshore workers evolved into the world's most trusted marketplace for multi-million dollar engineering assets.</p>
+               
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
                         <div class="text-center">
                             <h3 class="text-4xl font-bold text-gold">$40B+</h3>
@@ -541,6 +494,8 @@
                         </div>
                     </div>
                     <p>Today, our procurement division oversees the movement of drilling rigs, heavy pipeline infrastructure, and subsea exploration modules across six continents. Every piece of equipment in our inventory undergoes a 48-point technical validation before listing.</p>
+                
+                    <!-- Enhanced Timeline -->
                     <div class="mt-16 border-l-4 border-gold pl-8 space-y-12">
                         <div class="flex gap-8"><div class="font-bold w-20 shrink-0">1999</div><div>Company founded in Houston with first digital rig auction platform.</div></div>
                         <div class="flex gap-8"><div class="font-bold w-20 shrink-0">2008</div><div>Launched Houston regional hub serving North America deepwater projects.</div></div>
@@ -550,7 +505,7 @@
                 </div>
             </div>
         </section>
-
+        <!-- Enhanced placeholder pages with more details -->
         <section id="page-jobs" class="page-section">
             <div class="max-w-5xl mx-auto text-center py-12">
                 <i class="fas fa-briefcase text-7xl text-gold mb-6"></i>
@@ -565,7 +520,6 @@
                 <button onclick="showPage('home')" class="mt-12 px-10 py-4 border-2 border-gold text-gold font-bold uppercase">Return to Dashboard</button>
             </div>
         </section>
-
         <section id="page-news" class="page-section">
             <div class="max-w-5xl mx-auto py-12">
                 <h2 class="heading-font text-4xl font-bold mb-8 text-center">GLOBAL ENERGY NEWS • LIVE UPDATES</h2>
@@ -584,7 +538,6 @@
                 <button onclick="showPage('home')" class="mt-12 block mx-auto px-10 py-4 border-2 border-gold text-gold font-bold uppercase">Return to Dashboard</button>
             </div>
         </section>
-
         <section id="page-training" class="page-section">
             <div class="max-w-5xl mx-auto py-12">
                 <h2 class="heading-font text-4xl font-bold mb-4 text-center">TECHNICAL CERTIFICATION &amp; ACADEMY</h2>
@@ -612,7 +565,6 @@
                 <button onclick="showPage('home')" class="mt-12 block mx-auto px-10 py-4 border-2 border-gold text-gold font-bold uppercase">Return to Dashboard</button>
             </div>
         </section>
-
         <section id="page-events" class="page-section">
             <div class="max-w-5xl mx-auto py-12">
                 <h2 class="heading-font text-4xl font-bold mb-4 text-center">GLOBAL EVENTS &amp; EXHIBITIONS 2026</h2>
@@ -629,11 +581,11 @@
                 <button onclick="showPage('home')" class="mt-12 block mx-auto px-10 py-4 border-2 border-gold text-gold font-bold uppercase">Return to Dashboard</button>
             </div>
         </section>
-
         <section id="page-cart" class="page-section">
             <h1 class="heading-font text-4xl font-bold mb-10 text-rigzone">Procurement Cart History</h1>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                <div class="lg:col-span-2 space-y-4" id="cart-items-container"></div>
+                <div class="lg:col-span-2 space-y-4" id="cart-items-container">
+                    </div>
                 <div class="bg-white p-8 shadow-2xl border-t-4 border-gold rounded h-fit sticky top-32">
                     <h3 class="heading-font text-xl font-bold mb-6 pb-2 border-b">Consolidated Invoice</h3>
                     <div class="flex justify-between mb-3 text-sm"><span>Equipment Subtotal:</span><span id="cart-subtotal" class="font-bold">$0.00</span></div>
@@ -646,7 +598,6 @@
                 </div>
             </div>
         </section>
-
         <section id="page-login" class="page-section">
             <div class="max-w-md mx-auto bg-white p-10 shadow-2xl rounded border-t-8 border-rigzone">
                 <div class="text-center mb-10">
@@ -670,7 +621,6 @@
                 </div>
             </div>
         </section>
-
         <section id="page-payment" class="page-section">
             <div class="max-w-4xl mx-auto bg-white p-12 shadow-2xl border rounded relative">
                 <div class="absolute top-0 right-0 p-8 text-gray-100 font-bold text-8xl pointer-events-none opacity-10 uppercase">Invoice</div>
@@ -686,6 +636,7 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
                     <div class="space-y-6">
+                        <!-- Enhanced PAY TO HERE header -->
                         <h3 class="wire-pay-header font-bold uppercase text-sm tracking-widest">PAY TO HERE - Wire Transfer Details</h3>
                         <div class="bg-gray-50 p-6 rounded border space-y-4 text-xs font-medium">
                             <div class="flex justify-between"><span>Beneficiary:</span><span class="font-bold text-rigzone">Rigzone Intl (Global)</span></div>
@@ -712,18 +663,18 @@
                         </div>
                     </div>
                 </div>
-               
+              
+                <!-- NEW: Upload receipt before finalizing payment -->
                 <div class="mt-8 border border-dashed border-gold rounded-2xl p-6 bg-gray-50">
                     <label class="block text-sm font-bold mb-3">Upload Payment Receipt Screenshot (Required)</label>
                     <input type="file" id="receipt-upload" accept="image/*" class="w-full text-sm border border-gray-300 rounded-lg p-3 cursor-pointer">
                     <p class="text-[10px] text-gray-400 mt-2">Please upload a clear screenshot of your completed wire transfer before confirming payment.</p>
                 </div>
-               
+              
                 <button onclick="confirmPayment()" class="w-full mt-8 bg-green-700 text-white py-5 rounded font-bold text-xl hover:bg-green-800 shadow-2xl transition tracking-widest uppercase">I Have Paid (Initiate Verification)</button>
             </div>
         </section>
     </main>
-
     <footer class="bg-rigzone text-white pt-20 pb-10 border-t-8 border-gold mt-20">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
             <div>
@@ -753,6 +704,8 @@
                 </div>
             </div>
         </div>
+    
+        <!-- SOCIAL MEDIA BAR (NEW) -->
         <div class="container mx-auto px-4 mt-12 border-t border-blue-900 pt-8 flex flex-wrap justify-center items-center gap-x-8 text-3xl text-blue-200">
             <a href="https://linkedin.com/company/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-linkedin"></i></a>
             <a href="https://x.com/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-x-twitter"></i></a>
@@ -761,11 +714,11 @@
             <a href="https://facebook.com/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-facebook"></i></a>
             <span class="text-xs uppercase tracking-[1px] text-blue-300 ml-4">Follow Rigzone Worldwide</span>
         </div>
+    
         <div class="container mx-auto px-4 border-t border-blue-900 mt-8 pt-10 text-center text-[10px] text-blue-400 font-bold uppercase tracking-[0.2em]">
             © 2026 RIGZONE WORLDWIDE. ALL RIGHTS RESERVED. SECURE INDUSTRIAL SUPPLY DIVISION.
         </div>
     </footer>
-
     <div class="fixed bottom-10 right-10 z-[60]">
         <button onclick="toggleChat()" class="bg-rigzone border-2 border-gold text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition duration-300">
             <i class="fas fa-headset text-2xl"></i>
@@ -787,9 +740,8 @@
             </div>
         </div>
     </div>
-
     <script>
-        // --- 30 PRODUCT DATASET (unchanged) ---
+        // --- 30 PRODUCT DATASET (unchanged from your code) ---
         const products = [
             { id: 1, name: "ZJ90B Ultra-Deep Land Drilling Rig", price: 12500000, category: "Rigs", image: "https://i.pinimg.com/1200x/1c/e4/6a/1ce46a03151d775c99376c523f7ed7fc.jpg", specs: "Max Depth: 9000m | HP: 3000" },
             { id: 2, name: "PDC Drill Bit - 8.5 Inch Elite Series", price: 85000, category: "Tooling", image: "https://i.pinimg.com/736x/66/97/43/66974344b04431b5b51ac7005861492e.jpg", specs: "Material: Polycrystalline Diamond" },
@@ -822,22 +774,18 @@
             { id: 29, name: "Industrial Water Filtration Plant", price: 890000, category: "Maintenance", image: "https://i.pinimg.com/1200x/2e/00/55/2e00554b498707c4b691d86a52e55a54.jpg", specs: "OSHA Grade" },
             { id: 30, name: "Pulsar PDC Drill Bit - 6 Inch Range", price: 81000, category: "Tooling", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK0RnI9tt6HmvNBcLA9szy2PHBUAavSqZoig&s", specs: "Hard Rock Spec" }
         ];
-
         let currentUser = JSON.parse(localStorage.getItem('rigzone_user')) || null;
         let cart = JSON.parse(localStorage.getItem('rigzone_cart')) || [];
-        let selectedProduct = null;   // ← Important for modal buttons
-
         // --- NAVIGATION ENGINE ---
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
             const target = document.getElementById('page-' + pageId);
             if(target) target.classList.add('active');
             window.scrollTo({top: 0, behavior: 'smooth'});
-        
+       
             if(pageId === 'equipment') renderProducts(products);
             if(pageId === 'cart') renderCart();
         }
-
         // --- AUTH & ACCOUNT ---
         function handleLogin(e) {
             e.preventDefault();
@@ -864,8 +812,7 @@
             }
             updateCartCount();
         }
-
-        // --- INVENTORY ENGINE ---
+        // --- INVENTORY ENGINE (now with clickable mature cards) ---
         function renderProducts(items) {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = items.map(p => `
@@ -894,14 +841,11 @@
             const filtered = products.filter(p => p.name.toLowerCase().includes(term) || p.category.toLowerCase().includes(term));
             renderProducts(filtered);
         }
-
-        // --- PRODUCT DETAIL MODAL (FIXED: now sets selectedProduct) ---
+        // --- PRODUCT DETAIL MODAL ---
         function showProductDetail(id) {
             const p = products.find(item => item.id === id);
             if (!p) return;
-            
-            selectedProduct = p;                     // ← FIXED: now modal buttons work
-
+        
             document.getElementById('modal-name').innerText = p.name;
             document.getElementById('modal-category').innerText = p.category;
             document.getElementById('modal-image').src = p.image;
@@ -912,37 +856,35 @@
             document.getElementById('product-modal').classList.remove('hidden');
             document.getElementById('product-modal').style.display = 'flex';
         }
-     
+    
         function hideProductModal() {
             const modal = document.getElementById('product-modal');
             modal.classList.add('hidden');
             modal.style.display = 'none';
-            selectedProduct = null;
         }
-
         function addToCartFromModal() {
-            if (!selectedProduct) return;
+            if (!selectedProduct) return; // fallback
             addToCart(selectedProduct.id);
         }
-     
+    
         function directBuyFromModal() {
             if (!selectedProduct) return;
             directBuy(selectedProduct.id);
         }
-
-        // --- NOTIFICATION ---
+        // --- BEAUTIFUL NOTIFICATION SYSTEM (replaces plain alerts) ---
+        let selectedProduct = null;
+    
         function showNotification(message) {
             const toast = document.getElementById('notification-toast');
             document.getElementById('toast-message').innerHTML = `<span class="text-xl">✓</span> ${message}`;
             toast.classList.remove('hidden');
             toast.style.display = 'flex';
-         
+        
             setTimeout(() => {
                 toast.classList.add('hidden');
                 toast.style.display = 'none';
             }, 3200);
         }
-
         // --- PROCUREMENT LOGIC ---
         function addToCart(id) {
             if(!currentUser) return showPage('login');
@@ -1010,7 +952,6 @@
         function updateCartCount() {
             document.getElementById('cart-count').innerText = cart.length;
         }
-
         // --- CHECKOUT & SETTLEMENT ---
         function processToCheckout() {
             if(cart.length === 0) return showNotification("Procurement cart is empty.");
@@ -1036,14 +977,16 @@
                 alert("Please upload your payment receipt screenshot first.");
                 return;
             }
-           
+          
+            // Show styled receipt instead of plain alert
             const orderId = document.getElementById('order-id').innerText;
             const total = document.getElementById('pay-amount').innerText;
-          
+         
+            // Populate receipt
             document.getElementById('receipt-order-id').innerText = orderId;
             document.getElementById('receipt-subtotal').innerText = total;
             document.getElementById('receipt-total').innerText = total;
-          
+         
             const receiptContainer = document.getElementById('receipt-items');
             receiptContainer.innerHTML = cart.map(item => `
                 <div class="flex justify-between items-center text-sm">
@@ -1051,10 +994,11 @@
                     <div class="font-bold">$${(item.price * item.qty).toLocaleString()}</div>
                 </div>
             `).join('');
-          
+         
             document.getElementById('receipt-modal').classList.remove('hidden');
             document.getElementById('receipt-modal').style.display = 'flex';
-          
+         
+            // Clear cart after successful payment demo
             cart = [];
             saveCart();
             renderCart();
@@ -1073,7 +1017,6 @@
             hideReceiptModal();
             showNotification("Receipt emailed to rigzone.office@gmail.com");
         }
-
         // --- LIVE SUPPORT ---
         function toggleChat() {
             document.getElementById('chat-box').classList.toggle('hidden');
@@ -1089,8 +1032,7 @@
                 msgBox.scrollTop = msgBox.scrollHeight;
             }, 1000);
         }
-
-        // --- SIDEBAR EVENTS ---
+        // --- SIDEBAR LOADING ---
         const eventData = [
             { date: "APR 22", title: "Offshore Technology Conference (OTC)", loc: "Houston, TX" },
             { date: "MAY 05", title: "Middle East Drilling Summit", loc: "Dubai, UAE" },
@@ -1107,14 +1049,12 @@
                 </div>
             </div>
         `).join('');
-
         // Modal helpers
         function showInvestorModal() { document.getElementById('investor-modal').classList.remove('hidden'); }
         function showHSModal() { document.getElementById('hse-modal').classList.remove('hidden'); }
         function showESGModal() { document.getElementById('esg-modal').classList.remove('hidden'); }
         function showOilPricesModal() { document.getElementById('oil-prices-modal').classList.remove('hidden'); }
         function hideOilPricesModal() { document.getElementById('oil-prices-modal').classList.add('hidden'); }
-
         // INITIALIZE
         updateAuthUI();
     </script>
