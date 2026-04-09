@@ -163,6 +163,97 @@
                 max-height: 92vh;
             }
         }
+        /* --- RIGZONE MOBILE COMPRESSION & FIT FIXES --- */
+        
+        @media (max-width: 768px) {
+            /* 1. Prevent Horizontal Scroll */
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+
+            /* 2. Compress Long Amounts (Payment/Receipt) */
+            .payment-total, #pay-amount, .grand-total {
+                font-size: 1.8rem !important; /* Smaller text for huge numbers */
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                display: block;
+                max-width: 100%;
+                line-height: 1.2;
+                letter-spacing: -1px;
+            }
+
+            /* 3. Fix Cart History: - / + / Delete */
+            #cart-items-container .flex {
+                flex-wrap: wrap; /* Allows items to stack instead of pushing right */
+            }
+            .cart-qty-control-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%; /* Take full width on mobile to show buttons clearly */
+                margin-top: 10px;
+                background: #f1f5f9;
+                padding: 8px;
+                border-radius: 6px;
+            }
+
+            /* 4. Show Serial, Condition, Warranty clearly */
+            .spec-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important; /* Two columns on phone */
+                gap: 8px;
+                width: 100%;
+            }
+            .spec-grid span {
+                font-size: 0.65rem !important; /* Compact text */
+                background: #fff;
+                padding: 4px;
+                border: 1px solid #e2e8f0;
+                display: block;
+                white-space: normal; /* Allow text to wrap */
+            }
+
+            /* 5. Fix Payment Method / Wire Details overlap */
+            #page-payment .bg-gray-50 {
+                padding: 12px !important;
+            }
+            #page-payment .flex.justify-between {
+                flex-direction: column !important; /* Stack labels and values */
+                align-items: flex-start !important;
+                border-bottom: 1px solid #e2e8f0;
+                padding-bottom: 8px;
+                margin-bottom: 8px;
+            }
+            .select-all {
+                font-size: 0.75rem !important;
+                word-break: break-all !important; /* Force bank codes to stay on screen */
+                color: var(--rigzone-blue);
+                font-weight: bold;
+            }
+
+            /* 6. Product Buttons (Add to Cart / Buy) */
+            .product-actions-mobile {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            /* 7. Image Adjustment */
+            .modal-content img {
+                max-height: 200px;
+                object-fit: cover;
+            }
+        }
+
+        /* Support for very small phones (under 380px) */
+        @media (max-width: 380px) {
+            .heading-font { font-size: 1.4rem !important; }
+            #pay-amount { font-size: 1.5rem !important; }
+        }
     </style>
 </head>
 <body>
