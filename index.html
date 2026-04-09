@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Inter:wght@300;400;600;700&display=swap');
-   
+    
         :root {
             --rigzone-blue: #002b5c;
             --rigzone-gold: #c5a059;
@@ -23,7 +23,7 @@
         .bg-rigzone { background-color: var(--rigzone-blue); }
         .text-rigzone { color: var(--rigzone-blue); }
         .border-gold { border-color: var(--rigzone-gold); }
-   
+    
         .btn-gold {
             background: linear-gradient(135deg, #c5a059 0%, #a38241 100%);
             color: white;
@@ -54,7 +54,7 @@
             transition: width 0.3s;
         }
         .nav-link-main:hover::after { width: 100%; }
-   
+    
         .spec-grid span { border-bottom: 1px dashed #e2e8f0; padding: 4px 0; font-size: 0.75rem; }
         /* MATURITY & BEAUTY ENHANCEMENTS */
         .mature-card {
@@ -85,7 +85,7 @@
             .heading-font { font-size: 1.75rem; }
             .page-section { min-height: 100vh; }
             .product-grid-mobile { grid-template-columns: 1fr !important; }
-           
+            
             /* Ultra-clean mobile modals - full comfort, no wasted space */
             .modal-content {
                 max-height: 92vh;
@@ -113,13 +113,13 @@
                 margin: 0 -32px;
                 padding: 16px 32px;
             }
-           
+            
             /* Receipt modal - perfectly fitted on phone */
             #receipt-modal .modal-content {
                 max-height: 94vh;
                 padding: 24px 20px;
             }
-           
+            
             /* Payment page - amount and wire details now fit perfectly */
             .wire-pay-header {
                 font-size: 1.1rem;
@@ -134,25 +134,25 @@
                 font-size: 2.25rem !important;
                 line-height: 1;
             }
-           
+            
             /* Cart quantity controls - fully visible on phone */
             .cart-qty-control {
                 padding: 4px 8px;
                 font-size: 0.875rem;
             }
-           
+            
             /* Product modal grid items - smaller text so everything fits */
             .product-spec-grid {
                 font-size: 0.7rem;
             }
-           
+            
             /* Nav becomes clean on tiny screens */
             nav .container {
                 padding-left: 8px;
                 padding-right: 8px;
             }
         }
-       
+        
         /* Extra mobile safety for product modal buttons */
         .product-modal-inner {
             display: flex;
@@ -163,51 +163,163 @@
                 max-height: 92vh;
             }
         }
-
-        /* === FINAL RECEIPT FIX - FULLY VISIBLE ON PHONE WITHOUT SCROLLING LEFT/RIGHT === */
-        @media (max-width: 640px) {
-            #receipt-modal .modal-content {
-                max-height: 96vh !important;
-                padding: 20px 16px !important;
-                width: calc(100% - 24px) !important;
-            }
-            
-            /* Make the big TOTAL PAID amount smaller and wrap cleanly */
-            #receipt-total {
-                font-size: 1.85rem !important;
-                line-height: 1.1 !important;
-                letter-spacing: -1px;
-                word-break: break-all;
-            }
-            
-            /* Receipt subtotal also compressed */
-            #receipt-subtotal {
-                font-size: 1.1rem !important;
-            }
-            
-            /* Receipt stamp smaller and less rotated so it fits */
-            .receipt-stamp {
-                font-size: 1.35rem !important;
-                padding: 4px 14px !important;
-                transform: rotate(-6deg) !important;
-            }
-            
-            /* Receipt items list - tighter spacing */
-            #receipt-items {
-                font-size: 0.9rem !important;
-                line-height: 1.3;
-            }
-            
-            /* Force all flex rows to stay on screen */
-            #receipt-modal .flex {
-                flex-wrap: wrap;
-            }
-            
-            /* No horizontal overflow anywhere */
-            #receipt-modal * {
-                max-width: 100%;
+        /* --- RIGZONE MOBILE COMPRESSION & FIT FIXES --- */
+        
+        @media (max-width: 768px) {
+            /* 1. Prevent Horizontal Scroll */
+            html, body {
                 overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+
+            /* 2. Compress Long Amounts (Payment/Receipt) */
+            .payment-total, #pay-amount, .grand-total {
+                font-size: 1.8rem !important; /* Smaller text for huge numbers */
                 word-wrap: break-word;
+                overflow-wrap: break-word;
+                display: block;
+                max-width: 100%;
+                line-height: 1.2;
+                letter-spacing: -1px;
+            }
+
+            /* 3. Fix Cart History: - / + / Delete */
+            #cart-items-container .flex {
+                flex-wrap: wrap; /* Allows items to stack instead of pushing right */
+            }
+            .cart-qty-control-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%; /* Take full width on mobile to show buttons clearly */
+                margin-top: 10px;
+                background: #f1f5f9;
+                padding: 8px;
+                border-radius: 6px;
+            }
+
+            /* 4. Show Serial, Condition, Warranty clearly */
+            .spec-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important; /* Two columns on phone */
+                gap: 8px;
+                width: 100%;
+            }
+            .spec-grid span {
+                font-size: 0.65rem !important; /* Compact text */
+                background: #fff;
+                padding: 4px;
+                border: 1px solid #e2e8f0;
+                display: block;
+                white-space: normal; /* Allow text to wrap */
+            }
+
+            /* 5. Fix Payment Method / Wire Details overlap */
+            #page-payment .bg-gray-50 {
+                padding: 12px !important;
+            }
+            #page-payment .flex.justify-between {
+                flex-direction: column !important; /* Stack labels and values */
+                align-items: flex-start !important;
+                border-bottom: 1px solid #e2e8f0;
+                padding-bottom: 8px;
+                margin-bottom: 8px;
+            }
+            .select-all {
+                font-size: 0.75rem !important;
+                word-break: break-all !important; /* Force bank codes to stay on screen */
+                color: var(--rigzone-blue);
+                font-weight: bold;
+            }
+
+            /* 6. Product Buttons (Add to Cart / Buy) */
+            .product-actions-mobile {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            /* 7. Image Adjustment */
+            .modal-content img {
+                max-height: 200px;
+                object-fit: cover;
+            }
+        }
+
+        /* Support for very small phones (under 380px) */
+        @media (max-width: 380px) {
+            .heading-font { font-size: 1.4rem !important; }
+            #pay-amount { font-size: 1.5rem !important; }
+        }
+        /* --- RECEIPT MODAL MOBILE OPTIMIZATION --- */
+        
+        @media (max-width: 640px) {
+            /* Fix the Receipt Container */
+            #receipt-modal .modal-content, 
+            .receipt-container {
+                width: 95% !important;
+                margin: 10px auto !important;
+                padding: 15px !important;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            /* Shrink Header Text */
+            .receipt-header-title {
+                font-size: 1rem !important;
+                letter-spacing: 1px;
+            }
+
+            /* Fix the "PAID • VERIFIED" Stamp */
+            .receipt-stamp {
+                position: relative !important;
+                transform: rotate(0deg) !important; /* Flatten it so it doesn't overlap text on small screens */
+                margin: 10px auto !important;
+                font-size: 0.8rem !important;
+                width: fit-content;
+                padding: 4px 12px !important;
+                display: block;
+            }
+
+            /* Compress the Items & Prices */
+            .receipt-item-row {
+                flex-direction: column !important; /* Stack item name and price */
+                align-items: flex-start !important;
+                gap: 2px;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 8px;
+                margin-bottom: 8px;
+            }
+
+            /* TOTAL PAID Amount - The most important part to shrink */
+            .receipt-total-amount {
+                font-size: 1.75rem !important; 
+                word-break: break-all !important;
+                line-height: 1;
+            }
+
+            /* Receipt Action Buttons */
+            .receipt-actions {
+                display: flex;
+                flex-direction: column !important; /* Stack "Email" and "Close" buttons */
+                gap: 10px;
+                width: 100%;
+            }
+
+            .receipt-actions button {
+                width: 100% !important;
+                font-size: 0.75rem !important;
+                padding: 12px !important;
+            }
+
+            /* Thank you text size */
+            .receipt-footer-text {
+                font-size: 0.7rem !important;
+                line-height: 1.4;
+                text-align: center;
             }
         }
     </style>
@@ -233,7 +345,7 @@
                     <div class="cursor-pointer hover:text-blue-900" onclick="showOilPricesModal()">Oil Prices</div>
                 </div>
             </div>
-       
+        
             <div class="flex items-center space-x-6">
                 <div id="auth-links" class="flex items-center space-x-4">
                     <button onclick="showPage('login')" class="text-xs font-bold text-gray-700 hover:text-blue-900">SIGN IN</button>
@@ -299,7 +411,7 @@
                         </div>
                     </div>
                 </div>
-             
+              
                 <!-- Sticky footer for mobile so buttons are always visible and comfortable -->
                 <div class="modal-footer mt-8 flex gap-3 md:mt-10">
                     <button onclick="addToCartFromModal();hideProductModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Add to Procurement Cart</button>
@@ -329,12 +441,12 @@
                         <div class="receipt-stamp inline-block px-8 py-1 text-2xl font-bold tracking-widest">PAID • VERIFIED</div>
                     </div>
                 </div>
-            
+             
                 <h1 class="heading-font text-4xl font-bold text-rigzone mb-1">RECEIPT #RZ-<span id="receipt-order-id" class="font-mono"></span></h1>
                 <p class="text-xs text-gray-400 mb-8">April 09, 2026 • Houston, Texas • Transaction Secured</p>
-            
+             
                 <div id="receipt-items" class="space-y-4 mb-8 border-t border-b py-6"></div>
-            
+             
                 <div class="flex justify-between text-sm mb-2">
                     <span class="font-medium">Subtotal</span>
                     <span id="receipt-subtotal" class="font-bold"></span>
@@ -347,11 +459,11 @@
                     <span>TOTAL PAID</span>
                     <span id="receipt-total"></span>
                 </div>
-            
+             
                 <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-xs text-emerald-700 mb-8">
                     Thank you for your procurement with Rigzone. All assets are now under 24-month performance warranty and 180-day buy-back guarantee. A digital copy has been sent to your corporate email.
                 </div>
-            
+             
                 <!-- Sticky footer for receipt buttons on mobile -->
                 <div class="modal-footer flex gap-3">
                     <button onclick="emailReceipt()" class="flex-1 py-4 btn-gold font-bold uppercase text-sm">Email Receipt to rigzone.office@gmail.com</button>
@@ -478,7 +590,7 @@
                 <div class="prose prose-lg text-gray-700 space-y-6">
                     <h2 class="text-2xl font-bold text-rigzone border-l-4 border-gold pl-4 uppercase heading-font">Engineering Excellence Since 1999</h2>
                     <p>Founded in Houston, Texas, RIGZONE began with a singular mission: to digitize the energy supply chain. What started as a recruitment portal for offshore workers evolved into the world's most trusted marketplace for multi-million dollar engineering assets.</p>
-               
+                
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
                         <div class="text-center">
                             <h3 class="text-4xl font-bold text-gold">$40B+</h3>
@@ -494,7 +606,7 @@
                         </div>
                     </div>
                     <p>Today, our procurement division oversees the movement of drilling rigs, heavy pipeline infrastructure, and subsea exploration modules across six continents. Every piece of equipment in our inventory undergoes a 48-point technical validation before listing.</p>
-                
+                 
                     <!-- Enhanced Timeline -->
                     <div class="mt-16 border-l-4 border-gold pl-8 space-y-12">
                         <div class="flex gap-8"><div class="font-bold w-20 shrink-0">1999</div><div>Company founded in Houston with first digital rig auction platform.</div></div>
@@ -663,14 +775,14 @@
                         </div>
                     </div>
                 </div>
-              
+               
                 <!-- NEW: Upload receipt before finalizing payment -->
                 <div class="mt-8 border border-dashed border-gold rounded-2xl p-6 bg-gray-50">
                     <label class="block text-sm font-bold mb-3">Upload Payment Receipt Screenshot (Required)</label>
                     <input type="file" id="receipt-upload" accept="image/*" class="w-full text-sm border border-gray-300 rounded-lg p-3 cursor-pointer">
                     <p class="text-[10px] text-gray-400 mt-2">Please upload a clear screenshot of your completed wire transfer before confirming payment.</p>
                 </div>
-              
+               
                 <button onclick="confirmPayment()" class="w-full mt-8 bg-green-700 text-white py-5 rounded font-bold text-xl hover:bg-green-800 shadow-2xl transition tracking-widest uppercase">I Have Paid (Initiate Verification)</button>
             </div>
         </section>
@@ -704,7 +816,7 @@
                 </div>
             </div>
         </div>
-    
+     
         <!-- SOCIAL MEDIA BAR (NEW) -->
         <div class="container mx-auto px-4 mt-12 border-t border-blue-900 pt-8 flex flex-wrap justify-center items-center gap-x-8 text-3xl text-blue-200">
             <a href="https://linkedin.com/company/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-linkedin"></i></a>
@@ -714,7 +826,7 @@
             <a href="https://facebook.com/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-facebook"></i></a>
             <span class="text-xs uppercase tracking-[1px] text-blue-300 ml-4">Follow Rigzone Worldwide</span>
         </div>
-    
+     
         <div class="container mx-auto px-4 border-t border-blue-900 mt-8 pt-10 text-center text-[10px] text-blue-400 font-bold uppercase tracking-[0.2em]">
             © 2026 RIGZONE WORLDWIDE. ALL RIGHTS RESERVED. SECURE INDUSTRIAL SUPPLY DIVISION.
         </div>
@@ -782,7 +894,7 @@
             const target = document.getElementById('page-' + pageId);
             if(target) target.classList.add('active');
             window.scrollTo({top: 0, behavior: 'smooth'});
-       
+        
             if(pageId === 'equipment') renderProducts(products);
             if(pageId === 'cart') renderCart();
         }
@@ -845,7 +957,7 @@
         function showProductDetail(id) {
             const p = products.find(item => item.id === id);
             if (!p) return;
-        
+         
             document.getElementById('modal-name').innerText = p.name;
             document.getElementById('modal-category').innerText = p.category;
             document.getElementById('modal-image').src = p.image;
@@ -856,7 +968,7 @@
             document.getElementById('product-modal').classList.remove('hidden');
             document.getElementById('product-modal').style.display = 'flex';
         }
-    
+     
         function hideProductModal() {
             const modal = document.getElementById('product-modal');
             modal.classList.add('hidden');
@@ -866,20 +978,20 @@
             if (!selectedProduct) return; // fallback
             addToCart(selectedProduct.id);
         }
-    
+     
         function directBuyFromModal() {
             if (!selectedProduct) return;
             directBuy(selectedProduct.id);
         }
         // --- BEAUTIFUL NOTIFICATION SYSTEM (replaces plain alerts) ---
         let selectedProduct = null;
-    
+     
         function showNotification(message) {
             const toast = document.getElementById('notification-toast');
             document.getElementById('toast-message').innerHTML = `<span class="text-xl">✓</span> ${message}`;
             toast.classList.remove('hidden');
             toast.style.display = 'flex';
-        
+         
             setTimeout(() => {
                 toast.classList.add('hidden');
                 toast.style.display = 'none';
@@ -977,16 +1089,16 @@
                 alert("Please upload your payment receipt screenshot first.");
                 return;
             }
-          
+           
             // Show styled receipt instead of plain alert
             const orderId = document.getElementById('order-id').innerText;
             const total = document.getElementById('pay-amount').innerText;
-         
+          
             // Populate receipt
             document.getElementById('receipt-order-id').innerText = orderId;
             document.getElementById('receipt-subtotal').innerText = total;
             document.getElementById('receipt-total').innerText = total;
-         
+          
             const receiptContainer = document.getElementById('receipt-items');
             receiptContainer.innerHTML = cart.map(item => `
                 <div class="flex justify-between items-center text-sm">
@@ -994,10 +1106,10 @@
                     <div class="font-bold">$${(item.price * item.qty).toLocaleString()}</div>
                 </div>
             `).join('');
-         
+          
             document.getElementById('receipt-modal').classList.remove('hidden');
             document.getElementById('receipt-modal').style.display = 'flex';
-         
+          
             // Clear cart after successful payment demo
             cart = [];
             saveCart();
