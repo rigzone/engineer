@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Inter:wght@300;400;600;700&display=swap');
-      
+     
         :root {
             --rigzone-blue: #002b5c;
             --rigzone-gold: #c5a059;
@@ -23,7 +23,7 @@
         .bg-rigzone { background-color: var(--rigzone-blue); }
         .text-rigzone { color: var(--rigzone-blue); }
         .border-gold { border-color: var(--rigzone-gold); }
-      
+     
         .btn-gold {
             background: linear-gradient(135deg, #c5a059 0%, #a38241 100%);
             color: white;
@@ -54,7 +54,7 @@
             transition: width 0.3s;
         }
         .nav-link-main:hover::after { width: 100%; }
-      
+     
         .spec-grid span { border-bottom: 1px dashed #e2e8f0; padding: 4px 0; font-size: 0.75rem; }
         /* MATURITY & BEAUTY ENHANCEMENTS */
         .mature-card {
@@ -80,17 +80,19 @@
             color: #c5a059;
             font-family: 'Roboto Condensed', sans-serif;
         }
-        /* Mobile-first responsiveness */
+        /* Mobile-first responsiveness - PERFECT PHONE FIT */
         @media (max-width: 640px) {
             .heading-font { font-size: 1.75rem; }
             .page-section { min-height: 100vh; }
             .product-grid-mobile { grid-template-columns: 1fr !important; }
             
-            /* Enhanced mobile modals - scrollable + compact */
+            /* Ultra-clean mobile modals - full comfort, no wasted space */
             .modal-content {
-                max-height: 85vh;
+                max-height: 92vh;
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
+                border-radius: 20px;
+                margin: 12px;
             }
             .modal-header {
                 position: sticky;
@@ -107,18 +109,31 @@
                 z-index: 10;
                 padding-top: 12px;
                 border-top: 1px solid #e5e7eb;
+                margin: 0 -32px;
+                padding: 16px 32px;
             }
             
-            /* Receipt modal - more compact on mobile */
+            /* Receipt modal - perfectly fitted on phone */
             #receipt-modal .modal-content {
-                max-height: 92vh;
-                padding: 20px 16px;
+                max-height: 94vh;
+                padding: 24px 20px;
             }
             
-            /* Make nav scrollable on very small screens */
+            /* Nav becomes clean on tiny screens */
             nav .container {
                 padding-left: 8px;
                 padding-right: 8px;
+            }
+            
+            /* Payment page wire transfer - super visible on mobile */
+            .wire-pay-header {
+                font-size: 1.1rem;
+                padding: 12px;
+                background: linear-gradient(90deg, #c5a059, #a38241);
+                color: white;
+                border-radius: 12px;
+                text-align: center;
+                margin-bottom: 16px;
             }
         }
         
@@ -129,7 +144,7 @@
         }
         @media (max-width: 640px) {
             .product-modal-inner {
-                max-height: 85vh;
+                max-height: 92vh;
             }
         }
     </style>
@@ -137,7 +152,7 @@
 <body>
     <div class="bg-black text-white text-[10px] py-2">
         <div class="container mx-auto px-4 flex justify-between items-center opacity-80 uppercase tracking-widest">
-            <div>Global Operations: Houston | London | Dubai | Singapore | Lagos</div>
+            <div>Global Operations: Houston | London | Dubai | Singapore</div>
             <div class="flex space-x-4">
                 <span onclick="showInvestorModal()" class="cursor-pointer hover:text-gold">Investor Relations</span>
                 <span onclick="showHSModal()" class="cursor-pointer hover:text-gold">HSE Policy</span>
@@ -155,7 +170,7 @@
                     <div class="cursor-pointer hover:text-blue-900" onclick="showOilPricesModal()">Oil Prices</div>
                 </div>
             </div>
-          
+         
             <div class="flex items-center space-x-6">
                 <div id="auth-links" class="flex items-center space-x-4">
                     <button onclick="showPage('login')" class="text-xs font-bold text-gray-700 hover:text-blue-900">SIGN IN</button>
@@ -193,7 +208,7 @@
     <div id="product-modal" onclick="if(event.target.id === 'product-modal')hideProductModal()" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center px-4">
         <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden modal modal-content">
             <div class="product-modal-inner p-8">
-                <!-- Added sticky header for mobile -->
+                <!-- Sticky header for mobile -->
                 <div class="modal-header flex justify-between items-start mb-6">
                     <div>
                         <span id="modal-category" class="inline-block px-4 py-1 text-xs font-bold bg-rigzone text-gold rounded-full"></span>
@@ -215,14 +230,14 @@
                         <p id="modal-specs" class="text-gray-600 leading-relaxed text-sm mb-8"></p>
                         <div class="space-y-4 text-sm">
                             <div class="flex justify-between border-b pb-2"><span class="font-medium">Manufacturer</span><span class="font-bold" id="modal-manufacturer">NOV / Infinity Tool</span></div>
-                            <div class="flex justify-between border-b pb-2"><span class="font-medium">Location</span><span class="font-bold" id="modal-location">Houston Yard • Lagos Port</span></div>
+                            <div class="flex justify-between border-b pb-2"><span class="font-medium">Location</span><span class="font-bold" id="modal-location">Houston Yard • USA</span></div>
                             <div class="flex justify-between border-b pb-2"><span class="font-medium">Lead Time</span><span class="font-bold text-emerald-600">Immediate Dispatch</span></div>
                             <div class="flex justify-between"><span class="font-medium">API / ISO Certified</span><span class="text-emerald-600">✓ YES</span></div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Added sticky footer for mobile so buttons are always visible -->
+               
+                <!-- Sticky footer for mobile so buttons are always visible and comfortable -->
                 <div class="modal-footer mt-8 flex gap-3 md:mt-10">
                     <button onclick="addToCartFromModal();hideProductModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Add to Procurement Cart</button>
                     <button onclick="directBuyFromModal();hideProductModal()" class="flex-1 btn-gold py-4 font-bold uppercase text-sm">Buy Now • Secure Checkout</button>
@@ -251,12 +266,12 @@
                         <div class="receipt-stamp inline-block px-8 py-1 text-2xl font-bold tracking-widest">PAID • VERIFIED</div>
                     </div>
                 </div>
-               
+              
                 <h1 class="heading-font text-4xl font-bold text-rigzone mb-1">RECEIPT #RZ-<span id="receipt-order-id" class="font-mono"></span></h1>
-                <p class="text-xs text-gray-400 mb-8">April 09, 2026 • Lagos, Nigeria • Transaction Secured</p>
-               
+                <p class="text-xs text-gray-400 mb-8">April 09, 2026 • Houston, Texas • Transaction Secured</p>
+              
                 <div id="receipt-items" class="space-y-4 mb-8 border-t border-b py-6"></div>
-               
+              
                 <div class="flex justify-between text-sm mb-2">
                     <span class="font-medium">Subtotal</span>
                     <span id="receipt-subtotal" class="font-bold"></span>
@@ -269,11 +284,11 @@
                     <span>TOTAL PAID</span>
                     <span id="receipt-total"></span>
                 </div>
-               
+              
                 <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-xs text-emerald-700 mb-8">
                     Thank you for your procurement with Rigzone. All assets are now under 24-month performance warranty and 180-day buy-back guarantee. A digital copy has been sent to your corporate email.
                 </div>
-               
+              
                 <!-- Sticky footer for receipt buttons on mobile -->
                 <div class="modal-footer flex gap-3">
                     <button onclick="emailReceipt()" class="flex-1 py-4 btn-gold font-bold uppercase text-sm">Email Receipt to rigzone.office@gmail.com</button>
@@ -286,7 +301,7 @@
     <div id="investor-modal" onclick="if(event.target.id === 'investor-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center">
         <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal">
             <h2 class="heading-font text-3xl font-bold mb-6">Q1 2026 Investor Update</h2>
-            <p class="text-sm leading-relaxed">Rigzone closed the quarter with $2.4B in equipment transactions. New Lagos regional hub operational. Projected 2026 revenue growth: 38%.</p>
+            <p class="text-sm leading-relaxed">Rigzone closed the quarter with $2.4B in equipment transactions. New Houston regional hub operational. Projected 2026 revenue growth: 38%.</p>
             <button onclick="document.getElementById('investor-modal').classList.add('hidden')" class="mt-8 w-full py-4 btn-gold">Download Full Report</button>
         </div>
     </div>
@@ -326,7 +341,7 @@
                         <div class="absolute bottom-0 left-0 p-10 text-white max-w-2xl">
                             <span class="bg-rigzone border border-gold text-gold px-3 py-1 text-[10px] font-bold mb-4 inline-block tracking-widest uppercase">Special Briefing</span>
                             <h2 class="heading-font text-5xl font-bold leading-tight">Navigating the 2026 Energy Transition: Infrastructure Demand Peaks</h2>
-                            <p class="mt-4 text-gray-300 text-sm">Strategic analysis of the current drilling super-cycle and the global shortage of high-spec offshore assets. Immediate procurement opportunities in Lagos and Houston yards.</p>
+                            <p class="mt-4 text-gray-300 text-sm">Strategic analysis of the current drilling super-cycle and the global shortage of high-spec offshore assets. Immediate procurement opportunities in Houston yards.</p>
                         </div>
                     </div>
                     <h3 class="heading-font text-xl font-bold mb-6 border-l-4 border-gold pl-4">STRATEGIC SECTORS</h3>
@@ -400,7 +415,7 @@
                 <div class="prose prose-lg text-gray-700 space-y-6">
                     <h2 class="text-2xl font-bold text-rigzone border-l-4 border-gold pl-4 uppercase heading-font">Engineering Excellence Since 1999</h2>
                     <p>Founded in Houston, Texas, RIGZONE began with a singular mission: to digitize the energy supply chain. What started as a recruitment portal for offshore workers evolved into the world's most trusted marketplace for multi-million dollar engineering assets.</p>
-                  
+                 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
                         <div class="text-center">
                             <h3 class="text-4xl font-bold text-gold">$40B+</h3>
@@ -416,11 +431,11 @@
                         </div>
                     </div>
                     <p>Today, our procurement division oversees the movement of drilling rigs, heavy pipeline infrastructure, and subsea exploration modules across six continents. Every piece of equipment in our inventory undergoes a 48-point technical validation before listing.</p>
-                   
+                  
                     <!-- Enhanced Timeline -->
                     <div class="mt-16 border-l-4 border-gold pl-8 space-y-12">
                         <div class="flex gap-8"><div class="font-bold w-20 shrink-0">1999</div><div>Company founded in Houston with first digital rig auction platform.</div></div>
-                        <div class="flex gap-8"><div class="font-bold w-20 shrink-0">2008</div><div>Launched Lagos regional hub serving West Africa deepwater projects.</div></div>
+                        <div class="flex gap-8"><div class="font-bold w-20 shrink-0">2008</div><div>Launched Houston regional hub serving North America deepwater projects.</div></div>
                         <div class="flex gap-8"><div class="font-bold w-20 shrink-0">2017</div><div>API Q1 and ISO 9001 certification achieved across all yards.</div></div>
                         <div class="flex gap-8"><div class="font-bold w-20 shrink-0">2026</div><div>AI-powered procurement engine live • $14.7B cumulative transactions.</div></div>
                     </div>
@@ -435,8 +450,8 @@
                 <p class="max-w-md mx-auto text-gray-500 mb-12">Real-time opportunities for drilling engineers, procurement specialists, rig superintendents and subsea technicians across 142 countries.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left max-w-3xl mx-auto">
                     <div class="bg-white p-6 rounded-3xl border mature-card">Drilling Engineer – Deepwater Gulf of Mexico • $168k–$245k</div>
-                    <div class="bg-white p-6 rounded-3xl border mature-card">Procurement Manager – Lagos Yard • $112k base + performance bonus</div>
-                    <div class="bg-white p-6 rounded-3xl border mature-card">Subsea Installation Supervisor – Offshore Nigeria • Rotation schedule</div>
+                    <div class="bg-white p-6 rounded-3xl border mature-card">Procurement Manager – Houston Yard • $112k base + performance bonus</div>
+                    <div class="bg-white p-6 rounded-3xl border mature-card">Subsea Installation Supervisor – Offshore USA • Rotation schedule</div>
                     <div class="bg-white p-6 rounded-3xl border mature-card">PDC Bit Specialist – International rotation • Immediate start</div>
                 </div>
                 <button onclick="showPage('home')" class="mt-12 px-10 py-4 border-2 border-gold text-gold font-bold uppercase">Return to Dashboard</button>
@@ -448,7 +463,7 @@
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="mature-card bg-white p-8 rounded-3xl border">
                         <span class="text-xs bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full">BREAKING</span>
-                        <h3 class="text-2xl font-bold mt-4">Nigeria awards 6 new deepwater blocks in 2026 licensing round</h3>
+                        <h3 class="text-2xl font-bold mt-4">USA awards new deepwater blocks in 2026 licensing round</h3>
                         <p class="mt-6 text-sm text-gray-600">Immediate demand for high-spec jack-up rigs and subsea BOP stacks. Rigzone has 11 certified units ready for mobilization.</p>
                     </div>
                     <div class="mature-card bg-white p-8 rounded-3xl border">
@@ -468,7 +483,7 @@
                     <div class="mature-card bg-white border rounded-3xl p-8">
                         <div class="h-2 bg-gold w-12 mb-6"></div>
                         <h4 class="font-bold text-xl">Well Control • Level 3 &amp; 4</h4>
-                        <p class="text-sm mt-6 text-gray-600">Simulator-based training • 5 days • Lagos &amp; Houston campuses</p>
+                        <p class="text-sm mt-6 text-gray-600">Simulator-based training • 5 days • Houston &amp; Gulf campuses</p>
                         <div class="mt-8 text-4xl font-bold text-rigzone">$4,800</div>
                     </div>
                     <div class="mature-card bg-white border rounded-3xl p-8">
@@ -496,8 +511,8 @@
                         <div class="flex-1"><h3 class="font-bold text-2xl">Offshore Technology Conference 2026</h3><p class="text-gray-600">Rigzone Pavilion • Live NOV &amp; Infinity Tool demonstrations</p></div>
                     </div>
                     <div onclick="alert('VIP registration confirmed. You will receive digital badges and equipment preview access.')" class="mature-card flex flex-col md:flex-row gap-6 bg-white border rounded-3xl p-8 cursor-pointer">
-                        <div class="text-center md:text-right md:w-28"><div class="text-xs font-bold">JUNE 9-11</div><div class="text-5xl font-bold text-rigzone">AOW</div><div class="text-xs text-gray-400">LAGOS</div></div>
-                        <div class="flex-1"><h3 class="font-bold text-2xl">Africa Oil Week • Equipment Summit</h3><p class="text-gray-600">West Africa deepwater focus • 300+ certified assets on display</p></div>
+                        <div class="text-center md:text-right md:w-28"><div class="text-xs font-bold">JUNE 9-11</div><div class="text-5xl font-bold text-rigzone">AOW</div><div class="text-xs text-gray-400">HOUSTON</div></div>
+                        <div class="flex-1"><h3 class="font-bold text-2xl">America Oil Week • Equipment Summit</h3><p class="text-gray-600">USA deepwater focus • 300+ certified assets on display</p></div>
                     </div>
                 </div>
                 <button onclick="showPage('home')" class="mt-12 block mx-auto px-10 py-4 border-2 border-gold text-gold font-bold uppercase">Return to Dashboard</button>
@@ -558,7 +573,8 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
                     <div class="space-y-6">
-                        <h3 class="font-bold border-b-2 border-gold pb-2 uppercase text-xs tracking-widest">Wire Transfer Details</h3>
+                        <!-- Enhanced PAY TO HERE header -->
+                        <h3 class="wire-pay-header font-bold uppercase text-sm tracking-widest">PAY TO HERE - Wire Transfer Details</h3>
                         <div class="bg-gray-50 p-6 rounded border space-y-4 text-xs font-medium">
                             <div class="flex justify-between"><span>Beneficiary:</span><span class="font-bold text-rigzone">Rigzone Intl (Global)</span></div>
                             <div class="flex justify-between"><span>Financial Partner:</span><span class="font-bold text-rigzone">Paystack / JP Morgan</span></div>
@@ -584,7 +600,15 @@
                         </div>
                     </div>
                 </div>
-                <button onclick="confirmPayment()" class="w-full bg-green-700 text-white py-5 rounded font-bold text-xl hover:bg-green-800 shadow-2xl transition tracking-widest uppercase">I Have Paid (Initiate Verification)</button>
+                
+                <!-- NEW: Upload receipt before finalizing payment -->
+                <div class="mt-8 border border-dashed border-gold rounded-2xl p-6 bg-gray-50">
+                    <label class="block text-sm font-bold mb-3">Upload Payment Receipt Screenshot (Required)</label>
+                    <input type="file" id="receipt-upload" accept="image/*" class="w-full text-sm border border-gray-300 rounded-lg p-3 cursor-pointer">
+                    <p class="text-[10px] text-gray-400 mt-2">Please upload a clear screenshot of your completed wire transfer before confirming payment.</p>
+                </div>
+                
+                <button onclick="confirmPayment()" class="w-full mt-8 bg-green-700 text-white py-5 rounded font-bold text-xl hover:bg-green-800 shadow-2xl transition tracking-widest uppercase">I Have Paid (Initiate Verification)</button>
             </div>
         </section>
     </main>
@@ -617,7 +641,7 @@
                 </div>
             </div>
         </div>
-       
+      
         <!-- SOCIAL MEDIA BAR (NEW) -->
         <div class="container mx-auto px-4 mt-12 border-t border-blue-900 pt-8 flex flex-wrap justify-center items-center gap-x-8 text-3xl text-blue-200">
             <a href="https://linkedin.com/company/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-linkedin"></i></a>
@@ -627,7 +651,7 @@
             <a href="https://facebook.com/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-facebook"></i></a>
             <span class="text-xs uppercase tracking-[1px] text-blue-300 ml-4">Follow Rigzone Worldwide</span>
         </div>
-       
+      
         <div class="container mx-auto px-4 border-t border-blue-900 mt-8 pt-10 text-center text-[10px] text-blue-400 font-bold uppercase tracking-[0.2em]">
             © 2026 RIGZONE WORLDWIDE. ALL RIGHTS RESERVED. SECURE INDUSTRIAL SUPPLY DIVISION.
         </div>
@@ -695,7 +719,7 @@
             const target = document.getElementById('page-' + pageId);
             if(target) target.classList.add('active');
             window.scrollTo({top: 0, behavior: 'smooth'});
-          
+         
             if(pageId === 'equipment') renderProducts(products);
             if(pageId === 'cart') renderCart();
         }
@@ -758,7 +782,7 @@
         function showProductDetail(id) {
             const p = products.find(item => item.id === id);
             if (!p) return;
-           
+          
             document.getElementById('modal-name').innerText = p.name;
             document.getElementById('modal-category').innerText = p.category;
             document.getElementById('modal-image').src = p.image;
@@ -769,7 +793,7 @@
             document.getElementById('product-modal').classList.remove('hidden');
             document.getElementById('product-modal').style.display = 'flex';
         }
-       
+      
         function hideProductModal() {
             const modal = document.getElementById('product-modal');
             modal.classList.add('hidden');
@@ -779,20 +803,20 @@
             if (!selectedProduct) return; // fallback
             addToCart(selectedProduct.id);
         }
-       
+      
         function directBuyFromModal() {
             if (!selectedProduct) return;
             directBuy(selectedProduct.id);
         }
         // --- BEAUTIFUL NOTIFICATION SYSTEM (replaces plain alerts) ---
         let selectedProduct = null;
-       
+      
         function showNotification(message) {
             const toast = document.getElementById('notification-toast');
             document.getElementById('toast-message').innerHTML = `<span class="text-xl">✓</span> ${message}`;
             toast.classList.remove('hidden');
             toast.style.display = 'flex';
-           
+          
             setTimeout(() => {
                 toast.classList.add('hidden');
                 toast.style.display = 'none';
@@ -885,6 +909,12 @@
             showPage('payment');
         }
         function confirmPayment() {
+            const uploadInput = document.getElementById('receipt-upload');
+            if (!uploadInput.files || uploadInput.files.length === 0) {
+                alert("Please upload your payment receipt screenshot first.");
+                return;
+            }
+            
             // Show styled receipt instead of plain alert
             const orderId = document.getElementById('order-id').innerText;
             const total = document.getElementById('pay-amount').innerText;
@@ -943,7 +973,7 @@
         const eventData = [
             { date: "APR 22", title: "Offshore Technology Conference (OTC)", loc: "Houston, TX" },
             { date: "MAY 05", title: "Middle East Drilling Summit", loc: "Dubai, UAE" },
-            { date: "JUN 09", title: "Africa Oil Week – Lagos", loc: "Lagos, Nigeria" }
+            { date: "JUN 09", title: "America Oil Week – Houston", loc: "Houston, TX" }
         ];
         document.getElementById('sidebar-events').innerHTML = eventData.map(e => `
             <div onclick="showNotification('VIP registration for ${e.title} confirmed')" class="flex items-center space-x-4 border-b pb-3 cursor-pointer hover:bg-gray-50 p-2 rounded-2xl">
