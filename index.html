@@ -80,13 +80,80 @@
             color: #c5a059;
             font-family: 'Roboto Condensed', sans-serif;
         }
+
+        /* ===== EUROPEAN PAYMENT SECTION MOBILE ===== */
+        .eu-payment-block {
+            background: #f0f4ff;
+            border: 1px solid #c5a059;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .eu-field-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 8px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .eu-field-row:last-child { border-bottom: none; }
+        .eu-field-label {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+            min-width: 90px;
+        }
+        .eu-field-val {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--rigzone-blue);
+            text-align: right;
+            word-break: break-all;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+        .eu-email-highlight {
+            background: #002b5c;
+            color: #c5a059;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            word-break: break-all;
+            display: block;
+            margin-top: 6px;
+            text-align: center;
+        }
+        .eu-pay-header {
+            background: linear-gradient(135deg, #002b5c, #004080);
+            color: #c5a059;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
         /* PERFECT MOBILE FIT - NO HORIZONTAL SCROLL, COMFORTABLE LAYOUT */
         @media (max-width: 640px) {
             .heading-font { font-size: 1.75rem; }
             .page-section { min-height: 100vh; }
             .product-grid-mobile { grid-template-columns: 1fr !important; }
             
-            /* Ultra-clean mobile modals - full comfort, no wasted space */
+            /* Ultra-clean mobile modals */
             .modal-content {
                 max-height: 92vh;
                 overflow-y: auto;
@@ -114,13 +181,11 @@
                 padding: 16px 32px;
             }
             
-            /* Receipt modal - perfectly fitted on phone */
             #receipt-modal .modal-content {
                 max-height: 94vh;
                 padding: 24px 20px;
             }
             
-            /* Payment page - amount and wire details now fit perfectly */
             .wire-pay-header {
                 font-size: 1.1rem;
                 padding: 12px;
@@ -135,25 +200,28 @@
                 line-height: 1;
             }
             
-            /* Cart quantity controls - fully visible on phone */
             .cart-qty-control {
                 padding: 4px 8px;
                 font-size: 0.875rem;
             }
             
-            /* Product modal grid items - smaller text so everything fits */
             .product-spec-grid {
                 font-size: 0.7rem;
             }
             
-            /* Nav becomes clean on tiny screens */
             nav .container {
                 padding-left: 8px;
                 padding-right: 8px;
             }
+
+            /* EU Payment on mobile */
+            .eu-payment-block { padding: 12px; }
+            .eu-field-label { min-width: 80px; font-size: 10px; }
+            .eu-field-val { font-size: 11px; }
+            .eu-email-highlight { font-size: 12px; padding: 8px 10px; }
+            .eu-pay-header { font-size: 11px; padding: 10px 12px; letter-spacing: 1px; }
         }
         
-        /* Extra mobile safety for product modal buttons */
         .product-modal-inner {
             display: flex;
             flex-direction: column;
@@ -163,19 +231,16 @@
                 max-height: 92vh;
             }
         }
-        /* --- RIGZONE MOBILE COMPRESSION & FIT FIXES --- */
-        
+
         @media (max-width: 768px) {
-            /* 1. Prevent Horizontal Scroll */
             html, body {
                 overflow-x: hidden;
                 width: 100%;
                 position: relative;
             }
 
-            /* 2. Compress Long Amounts (Payment/Receipt) */
             .payment-total, #pay-amount, .grand-total {
-                font-size: 1.8rem !important; /* Smaller text for huge numbers */
+                font-size: 1.8rem !important;
                 word-wrap: break-word;
                 overflow-wrap: break-word;
                 display: block;
@@ -184,43 +249,40 @@
                 letter-spacing: -1px;
             }
 
-            /* 3. Fix Cart History: - / + / Delete */
             #cart-items-container .flex {
-                flex-wrap: wrap; /* Allows items to stack instead of pushing right */
+                flex-wrap: wrap;
             }
             .cart-qty-control-wrapper {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                width: 100%; /* Take full width on mobile to show buttons clearly */
+                width: 100%;
                 margin-top: 10px;
                 background: #f1f5f9;
                 padding: 8px;
                 border-radius: 6px;
             }
 
-            /* 4. Show Serial, Condition, Warranty clearly */
             .spec-grid {
                 display: grid !important;
-                grid-template-columns: 1fr 1fr !important; /* Two columns on phone */
+                grid-template-columns: 1fr 1fr !important;
                 gap: 8px;
                 width: 100%;
             }
             .spec-grid span {
-                font-size: 0.65rem !important; /* Compact text */
+                font-size: 0.65rem !important;
                 background: #fff;
                 padding: 4px;
                 border: 1px solid #e2e8f0;
                 display: block;
-                white-space: normal; /* Allow text to wrap */
+                white-space: normal;
             }
 
-            /* 5. Fix Payment Method / Wire Details overlap */
             #page-payment .bg-gray-50 {
                 padding: 12px !important;
             }
             #page-payment .flex.justify-between {
-                flex-direction: column !important; /* Stack labels and values */
+                flex-direction: column !important;
                 align-items: flex-start !important;
                 border-bottom: 1px solid #e2e8f0;
                 padding-bottom: 8px;
@@ -228,12 +290,11 @@
             }
             .select-all {
                 font-size: 0.75rem !important;
-                word-break: break-all !important; /* Force bank codes to stay on screen */
+                word-break: break-all !important;
                 color: var(--rigzone-blue);
                 font-weight: bold;
             }
 
-            /* 6. Product Buttons (Add to Cart / Buy) */
             .product-actions-mobile {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -242,22 +303,18 @@
                 margin-top: 15px;
             }
             
-            /* 7. Image Adjustment */
             .modal-content img {
                 max-height: 200px;
                 object-fit: cover;
             }
         }
 
-        /* Support for very small phones (under 380px) */
         @media (max-width: 380px) {
             .heading-font { font-size: 1.4rem !important; }
             #pay-amount { font-size: 1.5rem !important; }
         }
-        /* --- RECEIPT MODAL MOBILE OPTIMIZATION --- */
-        
+
         @media (max-width: 640px) {
-            /* Fix the Receipt Container */
             #receipt-modal .modal-content, 
             .receipt-container {
                 width: 95% !important;
@@ -267,16 +324,14 @@
                 overflow-y: auto;
             }
 
-            /* Shrink Header Text */
             .receipt-header-title {
                 font-size: 1rem !important;
                 letter-spacing: 1px;
             }
 
-            /* Fix the "PAID • VERIFIED" Stamp */
             .receipt-stamp {
                 position: relative !important;
-                transform: rotate(0deg) !important; /* Flatten it so it doesn't overlap text on small screens */
+                transform: rotate(0deg) !important;
                 margin: 10px auto !important;
                 font-size: 0.8rem !important;
                 width: fit-content;
@@ -284,9 +339,8 @@
                 display: block;
             }
 
-            /* Compress the Items & Prices */
             .receipt-item-row {
-                flex-direction: column !important; /* Stack item name and price */
+                flex-direction: column !important;
                 align-items: flex-start !important;
                 gap: 2px;
                 border-bottom: 1px solid #eee;
@@ -294,17 +348,15 @@
                 margin-bottom: 8px;
             }
 
-            /* TOTAL PAID Amount - The most important part to shrink */
             .receipt-total-amount {
                 font-size: 1.75rem !important; 
                 word-break: break-all !important;
                 line-height: 1;
             }
 
-            /* Receipt Action Buttons */
             .receipt-actions {
                 display: flex;
-                flex-direction: column !important; /* Stack "Email" and "Close" buttons */
+                flex-direction: column !important;
                 gap: 10px;
                 width: 100%;
             }
@@ -315,7 +367,6 @@
                 padding: 12px !important;
             }
 
-            /* Thank you text size */
             .receipt-footer-text {
                 font-size: 0.7rem !important;
                 line-height: 1.4;
@@ -383,7 +434,6 @@
     <div id="product-modal" onclick="if(event.target.id === 'product-modal')hideProductModal()" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center px-4">
         <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden modal modal-content">
             <div class="product-modal-inner p-8">
-                <!-- Sticky header for mobile -->
                 <div class="modal-header flex justify-between items-start mb-6">
                     <div>
                         <span id="modal-category" class="inline-block px-4 py-1 text-xs font-bold bg-rigzone text-gold rounded-full"></span>
@@ -411,8 +461,6 @@
                         </div>
                     </div>
                 </div>
-              
-                <!-- Sticky footer for mobile so buttons are always visible and comfortable -->
                 <div class="modal-footer mt-8 flex gap-3 md:mt-10">
                     <button onclick="addToCartFromModal();hideProductModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Add to Procurement Cart</button>
                     <button onclick="directBuyFromModal();hideProductModal()" class="flex-1 btn-gold py-4 font-bold uppercase text-sm">Buy Now • Secure Checkout</button>
@@ -443,7 +491,7 @@
                 </div>
              
                 <h1 class="heading-font text-4xl font-bold text-rigzone mb-1">RECEIPT #RZ-<span id="receipt-order-id" class="font-mono"></span></h1>
-                <p class="text-xs text-gray-400 mb-8">April 09, 2026 • Houston, Texas • Transaction Secured</p>
+                <p class="text-xs text-gray-400 mb-8">April 09, 2026 • London, United Kingdom • Transaction Secured</p>
              
                 <div id="receipt-items" class="space-y-4 mb-8 border-t border-b py-6"></div>
              
@@ -464,7 +512,6 @@
                     Thank you for your procurement with Rigzone. All assets are now under 24-month performance warranty and 180-day buy-back guarantee. A digital copy has been sent to your corporate email.
                 </div>
              
-                <!-- Sticky footer for receipt buttons on mobile -->
                 <div class="modal-footer flex gap-3">
                     <button onclick="emailReceipt()" class="flex-1 py-4 btn-gold font-bold uppercase text-sm">Email Receipt to rigzone.office@gmail.com</button>
                     <button onclick="hideReceiptModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Close Receipt</button>
@@ -472,7 +519,7 @@
             </div>
         </div>
     </div>
-    <!-- Investor, HSE, ESG quick modals (minimal) -->
+    <!-- Investor, HSE, ESG quick modals -->
     <div id="investor-modal" onclick="if(event.target.id === 'investor-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center">
         <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal">
             <h2 class="heading-font text-3xl font-bold mb-6">Q1 2026 Investor Update</h2>
@@ -559,8 +606,7 @@
                     </div>
                     <div class="bg-white border p-6 shadow-sm">
                         <h3 class="heading-font font-bold mb-4 uppercase text-sm">Upcoming Summits</h3>
-                        <div class="space-y-4" id="sidebar-events">
-                            </div>
+                        <div class="space-y-4" id="sidebar-events"></div>
                     </div>
                 </div>
             </div>
@@ -576,8 +622,7 @@
                     <i class="fas fa-search absolute left-3 top-4 text-gray-400"></i>
                 </div>
             </div>
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 product-grid-mobile">
-                </div>
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 product-grid-mobile"></div>
         </section>
         <section id="page-history" class="page-section">
             <div class="max-w-4xl mx-auto">
@@ -590,24 +635,12 @@
                 <div class="prose prose-lg text-gray-700 space-y-6">
                     <h2 class="text-2xl font-bold text-rigzone border-l-4 border-gold pl-4 uppercase heading-font">Engineering Excellence Since 1999</h2>
                     <p>Founded in Houston, Texas, RIGZONE began with a singular mission: to digitize the energy supply chain. What started as a recruitment portal for offshore workers evolved into the world's most trusted marketplace for multi-million dollar engineering assets.</p>
-                
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
-                        <div class="text-center">
-                            <h3 class="text-4xl font-bold text-gold">$40B+</h3>
-                            <p class="text-[10px] uppercase font-bold tracking-widest">Transaction Volume</p>
-                        </div>
-                        <div class="text-center">
-                            <h3 class="text-4xl font-bold text-gold">140+</h3>
-                            <p class="text-[10px] uppercase font-bold tracking-widest">Countries Served</p>
-                        </div>
-                        <div class="text-center">
-                            <h3 class="text-4xl font-bold text-gold">8500</h3>
-                            <p class="text-[10px] uppercase font-bold tracking-widest">Engineering Partners</p>
-                        </div>
+                        <div class="text-center"><h3 class="text-4xl font-bold text-gold">$40B+</h3><p class="text-[10px] uppercase font-bold tracking-widest">Transaction Volume</p></div>
+                        <div class="text-center"><h3 class="text-4xl font-bold text-gold">140+</h3><p class="text-[10px] uppercase font-bold tracking-widest">Countries Served</p></div>
+                        <div class="text-center"><h3 class="text-4xl font-bold text-gold">8500</h3><p class="text-[10px] uppercase font-bold tracking-widest">Engineering Partners</p></div>
                     </div>
                     <p>Today, our procurement division oversees the movement of drilling rigs, heavy pipeline infrastructure, and subsea exploration modules across six continents. Every piece of equipment in our inventory undergoes a 48-point technical validation before listing.</p>
-                 
-                    <!-- Enhanced Timeline -->
                     <div class="mt-16 border-l-4 border-gold pl-8 space-y-12">
                         <div class="flex gap-8"><div class="font-bold w-20 shrink-0">1999</div><div>Company founded in Houston with first digital rig auction platform.</div></div>
                         <div class="flex gap-8"><div class="font-bold w-20 shrink-0">2008</div><div>Launched Houston regional hub serving North America deepwater projects.</div></div>
@@ -617,7 +650,6 @@
                 </div>
             </div>
         </section>
-        <!-- Enhanced placeholder pages with more details -->
         <section id="page-jobs" class="page-section">
             <div class="max-w-5xl mx-auto text-center py-12">
                 <i class="fas fa-briefcase text-7xl text-gold mb-6"></i>
@@ -655,24 +687,9 @@
                 <h2 class="heading-font text-4xl font-bold mb-4 text-center">TECHNICAL CERTIFICATION &amp; ACADEMY</h2>
                 <p class="text-center text-gray-500 mb-12">API • IADC • IWCF • ISO 45001 compliant programs</p>
                 <div class="grid md:grid-cols-3 gap-8">
-                    <div class="mature-card bg-white border rounded-3xl p-8">
-                        <div class="h-2 bg-gold w-12 mb-6"></div>
-                        <h4 class="font-bold text-xl">Well Control • Level 3 &amp; 4</h4>
-                        <p class="text-sm mt-6 text-gray-600">Simulator-based training • 5 days • Houston &amp; Gulf campuses</p>
-                        <div class="mt-8 text-4xl font-bold text-rigzone">$4,800</div>
-                    </div>
-                    <div class="mature-card bg-white border rounded-3xl p-8">
-                        <div class="h-2 bg-gold w-12 mb-6"></div>
-                        <h4 class="font-bold text-xl">PDC Bit Optimization</h4>
-                        <p class="text-sm mt-6 text-gray-600">Hands-on with Infinity Tool 6" range • Certification included</p>
-                        <div class="mt-8 text-4xl font-bold text-rigzone">$2,950</div>
-                    </div>
-                    <div class="mature-card bg-white border rounded-3xl p-8">
-                        <div class="h-2 bg-gold w-12 mb-6"></div>
-                        <h4 class="font-bold text-xl">NOV Top Drive Maintenance</h4>
-                        <p class="text-sm mt-6 text-gray-600">Manufacturer-approved • Includes spare parts credit</p>
-                        <div class="mt-8 text-4xl font-bold text-rigzone">$3,750</div>
-                    </div>
+                    <div class="mature-card bg-white border rounded-3xl p-8"><div class="h-2 bg-gold w-12 mb-6"></div><h4 class="font-bold text-xl">Well Control • Level 3 &amp; 4</h4><p class="text-sm mt-6 text-gray-600">Simulator-based training • 5 days • Houston &amp; Gulf campuses</p><div class="mt-8 text-4xl font-bold text-rigzone">$4,800</div></div>
+                    <div class="mature-card bg-white border rounded-3xl p-8"><div class="h-2 bg-gold w-12 mb-6"></div><h4 class="font-bold text-xl">PDC Bit Optimization</h4><p class="text-sm mt-6 text-gray-600">Hands-on with Infinity Tool 6" range • Certification included</p><div class="mt-8 text-4xl font-bold text-rigzone">$2,950</div></div>
+                    <div class="mature-card bg-white border rounded-3xl p-8"><div class="h-2 bg-gold w-12 mb-6"></div><h4 class="font-bold text-xl">NOV Top Drive Maintenance</h4><p class="text-sm mt-6 text-gray-600">Manufacturer-approved • Includes spare parts credit</p><div class="mt-8 text-4xl font-bold text-rigzone">$3,750</div></div>
                 </div>
                 <button onclick="showPage('home')" class="mt-12 block mx-auto px-10 py-4 border-2 border-gold text-gold font-bold uppercase">Return to Dashboard</button>
             </div>
@@ -696,8 +713,7 @@
         <section id="page-cart" class="page-section">
             <h1 class="heading-font text-4xl font-bold mb-10 text-rigzone">Procurement Cart History</h1>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                <div class="lg:col-span-2 space-y-4" id="cart-items-container">
-                    </div>
+                <div class="lg:col-span-2 space-y-4" id="cart-items-container"></div>
                 <div class="bg-white p-8 shadow-2xl border-t-4 border-gold rounded h-fit sticky top-32">
                     <h3 class="heading-font text-xl font-bold mb-6 pb-2 border-b">Consolidated Invoice</h3>
                     <div class="flex justify-between mb-3 text-sm"><span>Equipment Subtotal:</span><span id="cart-subtotal" class="font-bold">$0.00</span></div>
@@ -733,40 +749,135 @@
                 </div>
             </div>
         </section>
+
+        <!-- ===== PAYMENT PAGE — EUROPEAN WIRE DETAILS ===== -->
         <section id="page-payment" class="page-section">
-            <div class="max-w-4xl mx-auto bg-white p-12 shadow-2xl border rounded relative">
+            <div class="max-w-4xl mx-auto bg-white p-6 md:p-12 shadow-2xl border rounded relative">
                 <div class="absolute top-0 right-0 p-8 text-gray-100 font-bold text-8xl pointer-events-none opacity-10 uppercase">Invoice</div>
-                <div class="flex justify-between items-start mb-12 border-b pb-8">
+
+                <!-- ORDER HEADER -->
+                <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-8 md:mb-12 border-b pb-6 md:pb-8">
                     <div>
-                        <h1 class="heading-font text-3xl font-bold text-rigzone">PURCHASE ORDER: #RZ-<span id="order-id"></span></h1>
-                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-widest">Generated for: Rigzone International Procurement</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] font-bold uppercase text-gray-400">Net Payable (USD)</p>
-                        <h2 class="payment-total text-5xl font-bold text-rigzone heading-font" id="pay-amount">$0.00</h2>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-                    <div class="space-y-6">
-                        <!-- Enhanced PAY TO HERE header -->
-                        <h3 class="wire-pay-header font-bold uppercase text-sm tracking-widest">PAY TO HERE - Wire Transfer Details</h3>
-                        <div class="bg-gray-50 p-6 rounded border space-y-4 text-xs font-medium">
-                            <div class="flex justify-between"><span>Beneficiary:</span><span class="font-bold text-rigzone">Rigzone Intl (Global)</span></div>
-                            <div class="flex justify-between"><span>Financial Partner:</span><span class="font-bold text-rigzone">Paystack / JP Morgan</span></div>
-                            <div class="flex justify-between border-t pt-2"><span>Account:</span><span id="bank-acc" class="font-bold select-all"></span></div>
-                            <div class="flex justify-between"><span>Routing (ABA):</span><span id="bank-route" class="font-bold select-all"></span></div>
-                            <div class="flex justify-between"><span>SWIFT/BIC:</span><span id="bank-swift" class="font-bold select-all"></span></div>
-                            <div class="flex justify-between"><span>Jurisdiction:</span><span class="font-bold">United States of America</span></div>
+                        <h1 class="heading-font text-2xl md:text-3xl font-bold text-rigzone">PURCHASE ORDER: #RZ-<span id="order-id"></span></h1>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-widest">Generated for: Rigzone European Procurement Division</p>
+                        <div class="mt-3 inline-flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-xl px-3 py-2">
+                            <span class="text-lg">🇪🇺</span>
+                            <span class="text-xs font-bold text-blue-800 uppercase tracking-wider">European Payment Gateway • SEPA / SWIFT</span>
                         </div>
                     </div>
+                    <div class="text-left sm:text-right">
+                        <p class="text-[10px] font-bold uppercase text-gray-400">Net Payable (USD)</p>
+                        <h2 class="payment-total text-4xl md:text-5xl font-bold text-rigzone heading-font" id="pay-amount">$0.00</h2>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-12">
+
+                    <!-- ===== LEFT: EUROPEAN WIRE TRANSFER DETAILS ===== -->
+                    <div class="space-y-4">
+                        <div class="eu-pay-header">
+                            <i class="fas fa-university"></i>
+                            PAY TO HERE — European Wire Transfer
+                        </div>
+
+                        <!-- Primary Contact / Email Payment -->
+                        <div class="eu-payment-block">
+                            <div class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                <i class="fas fa-envelope text-gold"></i> Primary Payment Contact
+                            </div>
+                            <div class="eu-field-row">
+                                <span class="eu-field-label">Send Payment To</span>
+                                <span class="eu-field-val" style="color:#c5a059;">rigzone.office@gmail.com</span>
+                            </div>
+                            <div class="eu-field-row">
+                                <span class="eu-field-label">Payment Method</span>
+                                <span class="eu-field-val">SEPA / Bank Wire / Crypto</span>
+                            </div>
+                            <span class="eu-email-highlight">
+                                <i class="fas fa-envelope mr-2"></i>rigzone.office@gmail.com
+                            </span>
+                        </div>
+
+                        <!-- European Bank Details -->
+                        <div class="eu-payment-block">
+                            <div class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                <i class="fas fa-landmark text-gold"></i> European Bank Account
+                            </div>
+                            <div class="eu-field-row">
+                                <span class="eu-field-label">Beneficiary</span>
+                                <span class="eu-field-val">Rigzone Intl (Europe)</span>
+                            </div>
+                            <div class="eu-field-row">
+                                <span class="eu-field-label">Bank Partner</span>
+                                <span class="eu-field-val">Deutsche Bank / Barclays</span>
+                            </div>
+                            <div class="eu-field-row">
+                                <span class="eu-field-label">IBAN</span>
+                                <span class="eu-field-val" id="bank-iban" style="font-family:monospace; font-size:11px;"></span>
+                            </div>
+                            <div class="eu-field-row">
+                                <span class="eu-field-label">SWIFT / BIC</span>
+                                <span class="eu-field-val" id="bank-swift" style="font-family:monospace;"></span>
+                            </div>
+                            <div class="eu-field-row">
+                                <span class="eu-field-label">Sort Code</span>
+                                <span class="eu-field-val" id="bank-sortcode" style="font-family:monospace;"></span>
+                            </div>
+                            <div class="eu-field-row">
+                                <span class="eu-field-label">Account No.</span>
+                                <span class="eu-field-val" id="bank-acc" style="font-family:monospace;"></span>
+                            </div>
+                            <div class="eu-field-row">
+                                <span class="eu-field-label">Bank Address</span>
+                                <span class="eu-field-val">1 Great Winchester St, London EC2N 2DB</span>
+                            </div>
+                            <div class="eu-field-row">
+                                <span class="eu-field-label">Jurisdiction</span>
+                                <span class="eu-field-val">🇬🇧 United Kingdom / 🇪🇺 EU</span>
+                            </div>
+                        </div>
+
+                        <!-- Reference note -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-blue-800">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            <strong>Payment Reference:</strong> Use Order ID <strong>#RZ-<span class="order-id-ref"></span></strong> as your payment reference to ensure instant matching.
+                        </div>
+                    </div>
+
+                    <!-- ===== RIGHT: CONFIRMATION & ACTION REQUIRED ===== -->
                     <div class="space-y-6">
                         <h3 class="font-bold border-b-2 border-gray-200 pb-2 uppercase text-xs tracking-widest">Confirmation Protocol</h3>
-                        <div class="p-6 bg-yellow-50 border border-yellow-200 rounded text-xs text-yellow-800 leading-relaxed">
-                            <p class="font-bold mb-3 uppercase tracking-tighter"><i class="fas fa-exclamation-triangle mr-2"></i>Action Required</p>
-                            Upon successful settlement, capture a high-resolution screenshot or PDF of the transaction receipt.
+                        <div class="p-5 bg-yellow-50 border border-yellow-200 rounded-xl text-xs text-yellow-800 leading-relaxed">
+                            <p class="font-bold mb-3 uppercase tracking-tighter text-sm"><i class="fas fa-exclamation-triangle mr-2"></i>Action Required</p>
+                            Upon successful payment, capture a high-resolution screenshot or PDF of your transaction confirmation.
                             <br><br>
-                            Submit all documentation immediately to: <br>
-                            <span class="font-bold text-rigzone text-[13px] bg-white px-2 py-1 inline-block mt-2">rigzone.office@gmail.com</span>
+                            Submit all documentation immediately to:
+                            <br>
+                            <span class="eu-email-highlight mt-3">
+                                <i class="fas fa-envelope mr-2"></i>rigzone.office@gmail.com
+                            </span>
+                        </div>
+                        <!-- Accepted Payment Methods -->
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Accepted Methods</p>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2 border">
+                                    <i class="fas fa-university text-rigzone"></i>
+                                    <span class="text-xs font-bold">SEPA Wire</span>
+                                </div>
+                                <div class="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2 border">
+                                    <i class="fas fa-globe text-rigzone"></i>
+                                    <span class="text-xs font-bold">SWIFT Transfer</span>
+                                </div>
+                                <div class="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2 border">
+                                    <i class="fab fa-bitcoin text-amber-500"></i>
+                                    <span class="text-xs font-bold">Crypto (BTC/ETH)</span>
+                                </div>
+                                <div class="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2 border">
+                                    <i class="fas fa-envelope text-gold"></i>
+                                    <span class="text-xs font-bold">Email Transfer</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="flex items-center space-x-6 grayscale opacity-40">
                             <i class="fab fa-cc-visa text-4xl"></i>
@@ -776,14 +887,19 @@
                     </div>
                 </div>
                
-                <!-- NEW: Upload receipt before finalizing payment -->
-                <div class="mt-8 border border-dashed border-gold rounded-2xl p-6 bg-gray-50">
-                    <label class="block text-sm font-bold mb-3">Upload Payment Receipt Screenshot (Required)</label>
-                    <input type="file" id="receipt-upload" accept="image/*" class="w-full text-sm border border-gray-300 rounded-lg p-3 cursor-pointer">
+                <!-- Upload receipt before finalizing payment -->
+                <div class="mt-4 border border-dashed border-gold rounded-2xl p-5 bg-gray-50">
+                    <label class="block text-sm font-bold mb-3 flex items-center gap-2">
+                        <i class="fas fa-upload text-gold"></i>
+                        Upload Payment Receipt Screenshot (Required)
+                    </label>
+                    <input type="file" id="receipt-upload" accept="image/*" class="w-full text-sm border border-gray-300 rounded-lg p-3 cursor-pointer bg-white">
                     <p class="text-[10px] text-gray-400 mt-2">Please upload a clear screenshot of your completed wire transfer before confirming payment.</p>
                 </div>
                
-                <button onclick="confirmPayment()" class="w-full mt-8 bg-green-700 text-white py-5 rounded font-bold text-xl hover:bg-green-800 shadow-2xl transition tracking-widest uppercase">I Have Paid (Initiate Verification)</button>
+                <button onclick="confirmPayment()" class="w-full mt-6 bg-green-700 text-white py-5 rounded font-bold text-lg md:text-xl hover:bg-green-800 shadow-2xl transition tracking-widest uppercase">
+                    <i class="fas fa-check-circle mr-2"></i>I Have Paid (Initiate Verification)
+                </button>
             </div>
         </section>
     </main>
@@ -816,8 +932,6 @@
                 </div>
             </div>
         </div>
-     
-        <!-- SOCIAL MEDIA BAR (NEW) -->
         <div class="container mx-auto px-4 mt-12 border-t border-blue-900 pt-8 flex flex-wrap justify-center items-center gap-x-8 text-3xl text-blue-200">
             <a href="https://linkedin.com/company/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-linkedin"></i></a>
             <a href="https://x.com/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-x-twitter"></i></a>
@@ -826,7 +940,6 @@
             <a href="https://facebook.com/rigzone" target="_blank" class="hover:text-gold transition"><i class="fab fa-facebook"></i></a>
             <span class="text-xs uppercase tracking-[1px] text-blue-300 ml-4">Follow Rigzone Worldwide</span>
         </div>
-     
         <div class="container mx-auto px-4 border-t border-blue-900 mt-8 pt-10 text-center text-[10px] text-blue-400 font-bold uppercase tracking-[0.2em]">
             © 2026 RIGZONE WORLDWIDE. ALL RIGHTS RESERVED. SECURE INDUSTRIAL SUPPLY DIVISION.
         </div>
@@ -853,7 +966,6 @@
         </div>
     </div>
     <script>
-        // --- 30 PRODUCT DATASET (unchanged from your code) ---
         const products = [
             { id: 1, name: "ZJ90B Ultra-Deep Land Drilling Rig", price: 12500000, category: "Rigs", image: "https://i.pinimg.com/1200x/1c/e4/6a/1ce46a03151d775c99376c523f7ed7fc.jpg", specs: "Max Depth: 9000m | HP: 3000" },
             { id: 2, name: "PDC Drill Bit - 8.5 Inch Elite Series", price: 85000, category: "Tooling", image: "https://i.pinimg.com/736x/66/97/43/66974344b04431b5b51ac7005861492e.jpg", specs: "Material: Polycrystalline Diamond" },
@@ -886,18 +998,20 @@
             { id: 29, name: "Industrial Water Filtration Plant", price: 890000, category: "Maintenance", image: "https://i.pinimg.com/1200x/2e/00/55/2e00554b498707c4b691d86a52e55a54.jpg", specs: "OSHA Grade" },
             { id: 30, name: "Pulsar PDC Drill Bit - 6 Inch Range", price: 81000, category: "Tooling", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK0RnI9tt6HmvNBcLA9szy2PHBUAavSqZoig&s", specs: "Hard Rock Spec" }
         ];
+
         let currentUser = JSON.parse(localStorage.getItem('rigzone_user')) || null;
         let cart = JSON.parse(localStorage.getItem('rigzone_cart')) || [];
+
         // --- NAVIGATION ENGINE ---
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
             const target = document.getElementById('page-' + pageId);
             if(target) target.classList.add('active');
             window.scrollTo({top: 0, behavior: 'smooth'});
-        
             if(pageId === 'equipment') renderProducts(products);
             if(pageId === 'cart') renderCart();
         }
+
         // --- AUTH & ACCOUNT ---
         function handleLogin(e) {
             e.preventDefault();
@@ -924,7 +1038,8 @@
             }
             updateCartCount();
         }
-        // --- INVENTORY ENGINE (now with clickable mature cards) ---
+
+        // --- INVENTORY ENGINE ---
         function renderProducts(items) {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = items.map(p => `
@@ -948,16 +1063,17 @@
                 </div>
             `).join('');
         }
+
         function filterProducts() {
             const term = document.getElementById('search-bar').value.toLowerCase();
             const filtered = products.filter(p => p.name.toLowerCase().includes(term) || p.category.toLowerCase().includes(term));
             renderProducts(filtered);
         }
+
         // --- PRODUCT DETAIL MODAL ---
         function showProductDetail(id) {
             const p = products.find(item => item.id === id);
             if (!p) return;
-         
             document.getElementById('modal-name').innerText = p.name;
             document.getElementById('modal-category').innerText = p.category;
             document.getElementById('modal-image').src = p.image;
@@ -968,35 +1084,33 @@
             document.getElementById('product-modal').classList.remove('hidden');
             document.getElementById('product-modal').style.display = 'flex';
         }
-     
         function hideProductModal() {
             const modal = document.getElementById('product-modal');
             modal.classList.add('hidden');
             modal.style.display = 'none';
         }
         function addToCartFromModal() {
-            if (!selectedProduct) return; // fallback
+            if (!selectedProduct) return;
             addToCart(selectedProduct.id);
         }
-     
         function directBuyFromModal() {
             if (!selectedProduct) return;
             directBuy(selectedProduct.id);
         }
-        // --- BEAUTIFUL NOTIFICATION SYSTEM (replaces plain alerts) ---
+
+        // --- NOTIFICATION SYSTEM ---
         let selectedProduct = null;
-     
         function showNotification(message) {
             const toast = document.getElementById('notification-toast');
             document.getElementById('toast-message').innerHTML = `<span class="text-xl">✓</span> ${message}`;
             toast.classList.remove('hidden');
             toast.style.display = 'flex';
-         
             setTimeout(() => {
                 toast.classList.add('hidden');
                 toast.style.display = 'none';
             }, 3200);
         }
+
         // --- PROCUREMENT LOGIC ---
         function addToCart(id) {
             if(!currentUser) return showPage('login');
@@ -1064,6 +1178,7 @@
         function updateCartCount() {
             document.getElementById('cart-count').innerText = cart.length;
         }
+
         // --- CHECKOUT & SETTLEMENT ---
         function processToCheckout() {
             if(cart.length === 0) return showNotification("Procurement cart is empty.");
@@ -1074,31 +1189,57 @@
                 initPaymentPage();
             }, 3000);
         }
+
+        // ===== EUROPEAN PAYMENT PAGE INIT =====
+        function generateIBAN() {
+            // Generate a realistic-looking UK IBAN: GB + 2 check digits + 4 bank code + 6 sort + 8 account
+            const check = Math.floor(10 + Math.random() * 89);
+            const sort = Math.floor(100000 + Math.random() * 899999).toString();
+            const acc = Math.floor(10000000 + Math.random() * 89999999).toString();
+            return `GB${check} BARC ${sort.slice(0,4)} ${sort.slice(4,6)}${acc.slice(0,2)} ${acc.slice(2,6)} ${acc.slice(6,8)}`;
+        }
+        function generateSortCode() {
+            const a = Math.floor(10 + Math.random() * 89);
+            const b = Math.floor(10 + Math.random() * 89);
+            const c = Math.floor(10 + Math.random() * 89);
+            return `${a}-${b}-${c}`;
+        }
+        function generateUKAccount() {
+            return Math.floor(10000000 + Math.random() * 89999999).toString();
+        }
+
         function initPaymentPage() {
             const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            document.getElementById('order-id').innerText = Date.now().toString().slice(-6);
+            const orderId = Date.now().toString().slice(-6);
+
+            document.getElementById('order-id').innerText = orderId;
             document.getElementById('pay-amount').innerText = `$${total.toLocaleString()}`;
-            document.getElementById('bank-acc').innerText = "0449" + Math.floor(10000000 + Math.random() * 90000000);
-            document.getElementById('bank-route').innerText = "021" + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('bank-swift').innerText = "RIGZUS33HOU";
+
+            // European banking details
+            document.getElementById('bank-iban').innerText = generateIBAN();
+            document.getElementById('bank-swift').innerText = 'BARCGB22XXX';
+            document.getElementById('bank-sortcode').innerText = generateSortCode();
+            document.getElementById('bank-acc').innerText = generateUKAccount();
+
+            // Fill all order ID references
+            document.querySelectorAll('.order-id-ref').forEach(el => el.innerText = orderId);
+
             showPage('payment');
         }
+
         function confirmPayment() {
             const uploadInput = document.getElementById('receipt-upload');
             if (!uploadInput.files || uploadInput.files.length === 0) {
                 alert("Please upload your payment receipt screenshot first.");
                 return;
             }
-           
-            // Show styled receipt instead of plain alert
             const orderId = document.getElementById('order-id').innerText;
             const total = document.getElementById('pay-amount').innerText;
-          
-            // Populate receipt
+
             document.getElementById('receipt-order-id').innerText = orderId;
             document.getElementById('receipt-subtotal').innerText = total;
             document.getElementById('receipt-total').innerText = total;
-          
+
             const receiptContainer = document.getElementById('receipt-items');
             receiptContainer.innerHTML = cart.map(item => `
                 <div class="flex justify-between items-center text-sm">
@@ -1106,15 +1247,15 @@
                     <div class="font-bold">$${(item.price * item.qty).toLocaleString()}</div>
                 </div>
             `).join('');
-          
+
             document.getElementById('receipt-modal').classList.remove('hidden');
             document.getElementById('receipt-modal').style.display = 'flex';
-          
-            // Clear cart after successful payment demo
+
             cart = [];
             saveCart();
             renderCart();
         }
+
         function hideReceiptModal() {
             const modal = document.getElementById('receipt-modal');
             modal.classList.add('hidden');
@@ -1124,11 +1265,12 @@
         function emailReceipt() {
             const orderId = document.getElementById('receipt-order-id').innerText;
             const amount = document.getElementById('receipt-total').innerText;
-            const mailto = `mailto:rigzone.office@gmail.com?subject=OFFICIAL%20RECEIPT%20ORDER%20${orderId}&body=Dear%20Rigzone%20Team%2C%0A%0APlease%20find%20attached%20my%20payment%20confirmation%20for%20Order%20%23${orderId}%20(%24${amount}).%0A%0AThank%20you.`;
+            const mailto = `mailto:rigzone.office@gmail.com?subject=OFFICIAL%20RECEIPT%20ORDER%20${orderId}&body=Dear%20Rigzone%20Team%2C%0A%0APlease%20find%20attached%20my%20payment%20confirmation%20for%20Order%20%23${orderId}%20(${amount}).%0A%0AThank%20you.`;
             window.location.href = mailto;
             hideReceiptModal();
             showNotification("Receipt emailed to rigzone.office@gmail.com");
         }
+
         // --- LIVE SUPPORT ---
         function toggleChat() {
             document.getElementById('chat-box').classList.toggle('hidden');
@@ -1144,6 +1286,7 @@
                 msgBox.scrollTop = msgBox.scrollHeight;
             }, 1000);
         }
+
         // --- SIDEBAR LOADING ---
         const eventData = [
             { date: "APR 22", title: "Offshore Technology Conference (OTC)", loc: "Houston, TX" },
@@ -1161,12 +1304,14 @@
                 </div>
             </div>
         `).join('');
+
         // Modal helpers
         function showInvestorModal() { document.getElementById('investor-modal').classList.remove('hidden'); }
         function showHSModal() { document.getElementById('hse-modal').classList.remove('hidden'); }
         function showESGModal() { document.getElementById('esg-modal').classList.remove('hidden'); }
         function showOilPricesModal() { document.getElementById('oil-prices-modal').classList.remove('hidden'); }
         function hideOilPricesModal() { document.getElementById('oil-prices-modal').classList.add('hidden'); }
+
         // INITIALIZE
         updateAuthUI();
     </script>
