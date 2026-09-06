@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -149,21 +148,32 @@
             gap: 8px;
         }
 
+        /* FULL SCREEN MODALS ON MOBILE */
+        @media (max-width: 640px) {
+            .modal-content {
+                width: 100% !important;
+                height: 100vh !important;
+                max-height: 100vh !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+            }
+            #receipt-modal .modal-content {
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 24px !important;
+                max-height: 100vh;
+                height: 100vh;
+                overflow-y: auto;
+                border-radius: 0 !important;
+            }
+        }
+
         /* PERFECT MOBILE FIT - NO HORIZONTAL SCROLL, COMFORTABLE LAYOUT */
         @media (max-width: 640px) {
             .heading-font { font-size: 1.75rem; }
             .page-section { min-height: 100vh; }
             .product-grid-mobile { grid-template-columns: 1fr !important; }
             
-            /* Ultra-clean mobile modals */
-            .modal-content {
-                max-height: 92vh;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-                border-radius: 20px;
-                margin: 12px;
-                width: calc(100% - 24px);
-            }
             .modal-header {
                 position: sticky;
                 top: 0;
@@ -181,11 +191,6 @@
                 border-top: 1px solid #e5e7eb;
                 margin: 0 -32px;
                 padding: 16px 32px;
-            }
-            
-            #receipt-modal .modal-content {
-                max-height: 94vh;
-                padding: 24px 20px;
             }
             
             .wire-pay-header {
@@ -307,7 +312,7 @@
             
             .modal-content img {
                 max-height: 200px;
-                object-fit: cover;
+                object-fit: contain;
             }
         }
 
@@ -317,15 +322,6 @@
         }
 
         @media (max-width: 640px) {
-            #receipt-modal .modal-content, 
-            .receipt-container {
-                width: 95% !important;
-                margin: 10px auto !important;
-                padding: 15px !important;
-                max-height: 90vh;
-                overflow-y: auto;
-            }
-
             .receipt-header-title {
                 font-size: 1rem !important;
                 letter-spacing: 1px;
@@ -418,8 +414,8 @@
         </div>
         <nav class="bg-rigzone text-white shadow-inner">
             <div class="container mx-auto flex overflow-x-auto text-[11px] font-bold uppercase tracking-wider">
-                <a href="javascript:void(0)" onclick="showPage('home')" class="px-6 py-4 hover:bg-blue-900 border-r border-blue-800 transition nav-link-main">Executive Summary</a>
                 <a href="javascript:void(0)" onclick="showPage('equipment')" class="px-6 py-4 hover:bg-blue-900 border-r border-blue-800 transition nav-link-main bg-blue-900">Heavy Equipment Inventory</a>
+                <a href="javascript:void(0)" onclick="showPage('home')" class="px-6 py-4 hover:bg-blue-900 border-r border-blue-800 transition nav-link-main">Executive Summary</a>
                 <a href="javascript:void(0)" onclick="showPage('history')" class="px-6 py-4 hover:bg-blue-900 border-r border-blue-800 transition nav-link-main">Company Heritage</a>
                 <a href="javascript:void(0)" onclick="showPage('training')" class="px-6 py-4 hover:bg-blue-900 border-r border-blue-800 transition nav-link-main">Technical Training</a>
                 <a href="javascript:void(0)" onclick="showPage('events')" class="px-6 py-4 hover:bg-blue-900 transition nav-link-main">Global Events</a>
@@ -431,29 +427,29 @@
         <h2 class="heading-font text-2xl font-bold tracking-[0.3em]">SECURE GATEWAY</h2>
         <p class="text-xs opacity-60 mt-2">ENCRYPTING PROCUREMENT DATA...</p>
     </div>
-    <!-- MATURITY MODALS -->
+    
     <!-- Product Detail Modal -->
-    <div id="product-modal" onclick="if(event.target.id === 'product-modal')hideProductModal()" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center px-4">
-        <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden modal modal-content">
-            <div class="product-modal-inner p-8">
-                <div class="modal-header flex justify-between items-start mb-6">
+    <div id="product-modal" onclick="if(event.target.id === 'product-modal')hideProductModal()" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center p-0 md:p-4">
+        <div class="bg-white w-full h-full md:max-w-4xl md:h-auto md:max-h-[95vh] md:rounded-3xl shadow-2xl overflow-y-auto modal modal-content p-6 md:p-8">
+            <div class="product-modal-inner">
+                <div class="modal-header flex justify-between items-start mb-6 sticky top-0 bg-white pb-4 z-10">
                     <div>
                         <span id="modal-category" class="inline-block px-4 py-1 text-xs font-bold bg-rigzone text-gold rounded-full"></span>
-                        <h1 id="modal-name" class="heading-font text-3xl font-bold mt-2"></h1>
+                        <h1 id="modal-name" class="heading-font text-2xl md:text-3xl font-bold mt-2"></h1>
                     </div>
-                    <button onclick="hideProductModal()" class="text-3xl text-gray-300 hover:text-gray-500">×</button>
+                    <button onclick="hideProductModal()" class="text-3xl text-gray-300 hover:text-gray-500 bg-gray-100 rounded-full w-10 h-10 flex items-center justify-center">×</button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                        <img id="modal-image" class="w-full rounded-2xl shadow-inner" alt="">
+                        <img id="modal-image" class="w-full h-64 md:h-80 object-contain bg-gray-50 rounded-2xl shadow-inner" alt="">
                         <div class="mt-6 grid grid-cols-3 gap-4 text-center text-xs product-spec-grid">
                             <div class="bg-gray-50 p-3 rounded-2xl"><span class="block text-gold font-bold">SERIAL</span><span id="modal-serial" class="font-mono"></span></div>
                             <div class="bg-gray-50 p-3 rounded-2xl"><span class="block text-gold font-bold">CONDITION</span><span class="text-emerald-600 font-bold">CERTIFIED • READY</span></div>
                             <div class="bg-gray-50 p-3 rounded-2xl"><span class="block text-gold font-bold">WARRANTY</span><span class="font-bold">24 MONTHS</span></div>
                         </div>
                     </div>
-                    <div>
-                        <div class="text-4xl font-bold text-rigzone heading-font mb-2" id="modal-price"></div>
+                    <div class="flex flex-col">
+                        <div class="text-3xl md:text-4xl font-bold text-rigzone heading-font mb-2" id="modal-price"></div>
                         <p id="modal-specs" class="text-gray-600 leading-relaxed text-sm mb-8"></p>
                         <div class="space-y-4 text-sm">
                             <div class="flex justify-between border-b pb-2"><span class="font-medium">Manufacturer</span><span class="font-bold" id="modal-manufacturer">NOV / Infinity Tool</span></div>
@@ -461,15 +457,16 @@
                             <div class="flex justify-between border-b pb-2"><span class="font-medium">Lead Time</span><span class="font-bold text-emerald-600">Immediate Dispatch</span></div>
                             <div class="flex justify-between"><span class="font-medium">API / ISO Certified</span><span class="text-emerald-600">✓ YES</span></div>
                         </div>
+                        <div class="modal-footer mt-auto pt-8 flex flex-col md:flex-row gap-3">
+                            <button onclick="addToCartFromModal();hideProductModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Add to Procurement Cart</button>
+                            <button onclick="directBuyFromModal();hideProductModal()" class="flex-1 btn-gold py-4 font-bold uppercase text-sm">Buy Now • Secure Checkout</button>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer mt-8 flex gap-3 md:mt-10">
-                    <button onclick="addToCartFromModal();hideProductModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Add to Procurement Cart</button>
-                    <button onclick="directBuyFromModal();hideProductModal()" class="flex-1 btn-gold py-4 font-bold uppercase text-sm">Buy Now • Secure Checkout</button>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Notification Toast -->
     <div id="notification-toast" onclick="this.classList.add('hidden')" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-white shadow-2xl border border-gold rounded-3xl px-8 py-4 flex items-center gap-4 z-[300] toast">
         <i class="fas fa-check-circle text-3xl text-gold"></i>
@@ -478,75 +475,92 @@
             <p class="text-xs text-gray-400">Asset successfully added to your procurement list</p>
         </div>
     </div>
+
+    <!-- Custom Error Modal -->
+    <div id="error-modal" onclick="if(event.target.id === 'error-modal')hideErrorModal()" class="hidden fixed inset-0 bg-black/70 z-[300] flex items-center justify-center p-0 md:px-4">
+        <div class="bg-white w-full h-full md:max-w-sm md:h-auto md:rounded-3xl shadow-2xl modal modal-content p-6 md:p-8 text-center flex flex-col justify-center relative">
+            <button onclick="hideErrorModal()" class="absolute top-4 right-4 text-3xl text-gray-300 hover:text-gray-500">×</button>
+            <div class="text-red-500 text-5xl mb-4"><i class="fas fa-exclamation-circle"></i></div>
+            <h2 class="heading-font text-2xl font-bold mb-4 text-rigzone">Action Required</h2>
+            <p id="error-modal-message" class="text-gray-600 mb-6">Please upload your payment receipt screenshot first to verify your transaction.</p>
+            <button onclick="hideErrorModal()" class="w-full py-4 btn-gold font-bold uppercase text-sm">Understood</button>
+        </div>
+    </div>
+
     <!-- Receipt Modal -->
-    <div id="receipt-modal" onclick="if(event.target.id === 'receipt-modal')hideReceiptModal()" class="hidden fixed inset-0 bg-black/70 z-[250] flex items-center justify-center px-4">
-        <div class="bg-white max-w-2xl w-full rounded-3xl shadow-2xl modal modal-content">
-            <div class="p-8">
-                <div class="flex justify-between mb-8">
-                    <div>
-                        <img src="https://images.rigzone.com/fonts/logo02_fullcolor.svg" class="h-9">
-                        <p class="text-xs text-gray-400 mt-1">RIGZONE • SECURE PROCUREMENT DIVISION</p>
-                    </div>
-                    <div class="text-right">
-                        <div class="receipt-stamp inline-block px-8 py-1 text-2xl font-bold tracking-widest">PAID • VERIFIED</div>
-                    </div>
+    <div id="receipt-modal" onclick="if(event.target.id === 'receipt-modal')hideReceiptModal()" class="hidden fixed inset-0 bg-black/70 z-[250] flex items-center justify-center p-0 md:px-4">
+        <div class="bg-white w-full h-full md:max-w-2xl md:h-auto md:max-h-[95vh] md:rounded-3xl shadow-2xl modal modal-content overflow-y-auto p-6 md:p-8">
+            <div class="flex justify-between mb-8 items-start">
+                <div>
+                    <img src="https://images.rigzone.com/fonts/logo02_fullcolor.svg" class="h-9">
+                    <p class="text-xs text-gray-400 mt-1">RIGZONE • SECURE PROCUREMENT DIVISION</p>
                 </div>
-             
-                <h1 class="heading-font text-4xl font-bold text-rigzone mb-1">RECEIPT #RZ-<span id="receipt-order-id" class="font-mono"></span></h1>
-                <p class="text-xs text-gray-400 mb-8">April 09, 2026 • London, United Kingdom • Transaction Secured</p>
-             
-                <div id="receipt-items" class="space-y-4 mb-8 border-t border-b py-6"></div>
-             
-                <div class="flex justify-between text-sm mb-2">
-                    <span class="font-medium">Subtotal</span>
-                    <span id="receipt-subtotal" class="font-bold"></span>
+                <div class="flex flex-col items-end gap-2">
+                    <button onclick="hideReceiptModal()" class="text-3xl text-gray-300 hover:text-gray-500 bg-gray-100 rounded-full w-10 h-10 flex items-center justify-center mb-2">×</button>
+                    <div class="receipt-stamp inline-block px-8 py-1 text-2xl font-bold tracking-widest">PAID • VERIFIED</div>
                 </div>
-                <div class="flex justify-between text-sm mb-2">
-                    <span class="font-medium">Global Logistics (FOB)</span>
-                    <span class="text-emerald-600 font-bold">COMPLIMENTARY</span>
-                </div>
-                <div class="flex justify-between text-sm mb-8 border-t pt-6 text-2xl font-bold text-rigzone">
-                    <span>TOTAL PAID</span>
-                    <span id="receipt-total"></span>
-                </div>
-             
-                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-xs text-emerald-700 mb-8">
-                    Thank you for your procurement with Rigzone. All assets are now under 24-month performance warranty and 180-day buy-back guarantee. A digital copy has been sent to your corporate email.
-                </div>
-             
-                <div class="modal-footer flex gap-3">
-                    <button onclick="emailReceipt()" class="flex-1 py-4 btn-gold font-bold uppercase text-sm">Email Receipt to rigzone.office@gmail.com</button>
-                    <button onclick="hideReceiptModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Close Receipt</button>
-                </div>
+            </div>
+         
+            <h1 class="heading-font text-3xl md:text-4xl font-bold text-rigzone mb-1">RECEIPT #RZ-<span id="receipt-order-id" class="font-mono"></span></h1>
+            <p class="text-xs text-gray-400 mb-8"><span id="receipt-date"></span> • London, United Kingdom • Transaction Secured</p>
+         
+            <div id="receipt-items" class="space-y-4 mb-8 border-t border-b py-6"></div>
+         
+            <div class="flex justify-between text-sm mb-2">
+                <span class="font-medium">Subtotal</span>
+                <span id="receipt-subtotal" class="font-bold"></span>
+            </div>
+            <div class="flex justify-between text-sm mb-2">
+                <span class="font-medium">Global Logistics (FOB)</span>
+                <span class="text-emerald-600 font-bold">COMPLIMENTARY</span>
+            </div>
+            <div class="flex justify-between text-sm mb-8 border-t pt-6 text-2xl font-bold text-rigzone">
+                <span>TOTAL PAID</span>
+                <span id="receipt-total"></span>
+            </div>
+         
+            <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-xs text-emerald-700 mb-8">
+                Thank you for your procurement with Rigzone. All assets are now under 24-month performance warranty and 180-day buy-back guarantee. A digital copy has been sent to your corporate email.
+            </div>
+         
+            <div class="modal-footer flex flex-col md:flex-row gap-3">
+                <button onclick="emailReceipt()" class="flex-1 py-4 btn-gold font-bold uppercase text-sm">Email Receipt to rigzone.office@gmail.com</button>
+                <button onclick="hideReceiptModal()" class="flex-1 py-4 border-2 border-rigzone font-bold uppercase text-sm">Close Receipt</button>
             </div>
         </div>
     </div>
+
     <!-- Investor, HSE, ESG quick modals -->
-    <div id="investor-modal" onclick="if(event.target.id === 'investor-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center">
-        <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal">
+    <div id="investor-modal" onclick="if(event.target.id === 'investor-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center p-0 md:p-4">
+        <div class="bg-white w-full h-full md:max-w-lg md:h-auto md:max-h-[95vh] md:rounded-3xl p-6 md:p-8 overflow-y-auto modal modal-content relative">
+            <button onclick="document.getElementById('investor-modal').classList.add('hidden')" class="absolute top-4 right-4 text-3xl text-gray-300 hover:text-gray-500">×</button>
             <h2 class="heading-font text-3xl font-bold mb-6">Q1 2026 Investor Update</h2>
             <p class="text-sm leading-relaxed">Rigzone closed the quarter with €2.4B in equipment transactions. New Houston regional hub operational. Projected 2026 revenue growth: 38%.</p>
             <button onclick="document.getElementById('investor-modal').classList.add('hidden')" class="mt-8 w-full py-4 btn-gold">Download Full Report</button>
         </div>
     </div>
-    <div id="hse-modal" onclick="if(event.target.id === 'hse-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center">
-        <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal">
+    <div id="hse-modal" onclick="if(event.target.id === 'hse-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center p-0 md:p-4">
+        <div class="bg-white w-full h-full md:max-w-lg md:h-auto md:max-h-[95vh] md:rounded-3xl p-6 md:p-8 overflow-y-auto modal modal-content relative">
+            <button onclick="document.getElementById('hse-modal').classList.add('hidden')" class="absolute top-4 right-4 text-3xl text-gray-300 hover:text-gray-500">×</button>
             <h2 class="heading-font text-3xl font-bold mb-6">HSE Policy 2026</h2>
             <p class="text-sm leading-relaxed">Zero-incident target achieved for 2025. All listed equipment meets or exceeds IADC, API Q1 and ISO 45001 standards.</p>
             <button onclick="document.getElementById('hse-modal').classList.add('hidden')" class="mt-8 w-full py-4 btn-gold">View Full HSE Manual</button>
         </div>
     </div>
-    <div id="esg-modal" onclick="if(event.target.id === 'esg-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center">
-        <div class="bg-white p-8 rounded-3xl max-w-lg w-full modal">
+    <div id="esg-modal" onclick="if(event.target.id === 'esg-modal')this.classList.add('hidden')" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center p-0 md:p-4">
+        <div class="bg-white w-full h-full md:max-w-lg md:h-auto md:max-h-[95vh] md:rounded-3xl p-6 md:p-8 overflow-y-auto modal modal-content relative">
+            <button onclick="document.getElementById('esg-modal').classList.add('hidden')" class="absolute top-4 right-4 text-3xl text-gray-300 hover:text-gray-500">×</button>
             <h2 class="heading-font text-3xl font-bold mb-6">ESG Performance 2025</h2>
             <p class="text-sm leading-relaxed">Carbon-neutral operations achieved in all 6 global yards. 100% of equipment listings include recycled material disclosure.</p>
             <button onclick="document.getElementById('esg-modal').classList.add('hidden')" class="mt-8 w-full py-4 btn-gold">Download ESG Report</button>
         </div>
     </div>
+
     <!-- Oil Prices Modal -->
-    <div id="oil-prices-modal" onclick="if(event.target.id === 'oil-prices-modal')hideOilPricesModal()" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center px-4">
-        <div class="bg-white rounded-3xl max-w-md w-full p-8 modal">
-            <h2 class="heading-font text-3xl font-bold mb-8 text-center">Live Commodity Prices • April 09, 2026</h2>
+    <div id="oil-prices-modal" onclick="if(event.target.id === 'oil-prices-modal')hideOilPricesModal()" class="hidden fixed inset-0 bg-black/70 z-[200] flex items-center justify-center p-0 md:px-4">
+        <div class="bg-white w-full h-full md:max-w-md md:h-auto md:max-h-[95vh] md:rounded-3xl p-6 md:p-8 overflow-y-auto modal modal-content relative">
+            <button onclick="hideOilPricesModal()" class="absolute top-4 right-4 text-3xl text-gray-300 hover:text-gray-500">×</button>
+            <h2 class="heading-font text-3xl font-bold mb-8 text-center">Live Commodity Prices • <span id="live-date"></span></h2>
             <div class="space-y-6">
                 <div class="flex justify-between items-center"><span class="font-medium">WTI Crude</span><span class="text-3xl font-bold text-green-600">€97.54</span></div>
                 <div class="flex justify-between items-center"><span class="font-medium">Brent Crude</span><span class="text-3xl font-bold text-green-600">€102.10</span></div>
@@ -556,7 +570,7 @@
         </div>
     </div>
     <main class="container mx-auto px-4 py-10">
-        <section id="page-home" class="page-section active">
+        <section id="page-home" class="page-section">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 <div class="lg:col-span-3">
                     <div class="relative rounded overflow-hidden shadow-2xl mb-10 group cursor-pointer" onclick="showPage('news')">
@@ -613,11 +627,11 @@
                 </div>
             </div>
         </section>
-        <section id="page-equipment" class="page-section">
+        <section id="page-equipment" class="page-section active">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b-2 border-gray-200 pb-6">
                 <div>
                     <h1 class="heading-font text-4xl font-bold text-rigzone uppercase">Industrial Procurement</h1>
-                    <p class="text-sm text-gray-500 mt-2">Verified Tier-1 Heavy Engineering &amp; Construction Assets • 30 Premium Listings</p>
+                    <p class="text-sm text-gray-500 mt-2">Verified Tier-1 Heavy Engineering &amp; Construction Assets • 31 Premium Listings</p>
                 </div>
                 <div class="relative mt-4 md:mt-0">
                     <input type="text" id="search-bar" onkeyup="filterProducts()" placeholder="Search Inventory (e.g. PDC Bit, Rig, Crane)..." class="w-80 pl-10 pr-4 py-3 border-2 border-rigzone rounded bg-white shadow-inner focus:outline-none focus:border-gold">
@@ -998,7 +1012,8 @@
             { id: 27, name: "PDC Reamer - 12.25 Expandable", price: 165000, category: "Tooling", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQygiN-1X3lkuMUrOLwD1iDE4534RUGibJneQ&s", specs: "Expandable" },
             { id: 28, name: "High Torque Drill Collar (Set)", price: 140000, category: "Tooling", image: "https://image.made-in-china.com/202f0j00TznbRrEqqCcG/Wa-T-Drill-Collar-Safety-Clamp-for-Well-Drilling-Oil-Drilling-Equipment.webp", specs: "Material: Non-Mag" },
             { id: 29, name: "Industrial Water Filtration Plant", price: 890000, category: "Maintenance", image: "https://i.pinimg.com/1200x/2e/00/55/2e00554b498707c4b691d86a52e55a54.jpg", specs: "OSHA Grade" },
-            { id: 30, name: "Pulsar PDC Drill Bit - 6 Inch Range", price: 81000, category: "Tooling", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK0RnI9tt6HmvNBcLA9szy2PHBUAavSqZoig&s", specs: "Hard Rock Spec" }
+            { id: 30, name: "Pulsar PDC Drill Bit - 6 Inch Range", price: 81000, category: "Tooling", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK0RnI9tt6HmvNBcLA9szy2PHBUAavSqZoig&s", specs: "Hard Rock Spec" },
+            { id: 31, name: "Massey Ferguson Heavy Duty Tractor", price: 110000, category: "Agriculture", image: "https://z-cdn-media.chatglm.cn/files/94e2b2d7-efc7-4084-8f60-c5c2aa1dafde.png?auth_key=1888687229-2a513b43d4a04ae0920fb5cd3e6a0827-0-f6248f1f1614bae1ae67b5f9101894ca", specs: "Engine: 150 HP | 4WD | Modern Cabin" }
         ];
 
         let currentUser = JSON.parse(localStorage.getItem('rigzone_user')) || null;
@@ -1027,7 +1042,7 @@
             currentUser = null;
             localStorage.removeItem('rigzone_user');
             updateAuthUI();
-            showPage('home');
+            showPage('equipment');
         }
         function updateAuthUI() {
             if(currentUser) {
@@ -1046,8 +1061,8 @@
             const grid = document.getElementById('product-grid');
             grid.innerHTML = items.map(p => `
                 <div onclick="showProductDetail(${p.id});event.stopImmediatePropagation()" class="bg-white border hover:border-gold group transition-all duration-300 flex flex-col h-full shadow-sm hover:shadow-2xl overflow-hidden mature-card cursor-pointer">
-                    <div class="relative overflow-hidden h-56">
-                        <img src="${p.image}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <div class="relative overflow-hidden h-56 bg-gray-50 flex items-center justify-center">
+                        <img src="${p.image}" class="w-full h-full object-contain transition-all duration-500 p-2">
                         <span class="absolute top-4 left-4 bg-rigzone text-gold text-[8px] font-bold px-3 py-1 uppercase tracking-widest">${p.category}</span>
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
@@ -1073,16 +1088,18 @@
         }
 
         // --- PRODUCT DETAIL MODAL ---
+        let selectedProduct = null;
         function showProductDetail(id) {
             const p = products.find(item => item.id === id);
             if (!p) return;
+            selectedProduct = p;
             document.getElementById('modal-name').innerText = p.name;
             document.getElementById('modal-category').innerText = p.category;
             document.getElementById('modal-image').src = p.image;
             document.getElementById('modal-price').innerText = '€' + p.price.toLocaleString();
             document.getElementById('modal-specs').innerText = p.specs;
             document.getElementById('modal-serial').innerText = '#RZ-2026-' + p.id;
-            document.getElementById('modal-manufacturer').innerText = p.category === 'Tooling' ? 'Infinity Tool Mfg' : 'NOV';
+            document.getElementById('modal-manufacturer').innerText = p.category === 'Tooling' ? 'Infinity Tool Mfg' : (p.category === 'Agriculture' ? 'Massey Ferguson' : 'NOV');
             document.getElementById('product-modal').classList.remove('hidden');
             document.getElementById('product-modal').style.display = 'flex';
         }
@@ -1101,7 +1118,6 @@
         }
 
         // --- NOTIFICATION SYSTEM ---
-        let selectedProduct = null;
         function showNotification(message) {
             const toast = document.getElementById('notification-toast');
             document.getElementById('toast-message').innerHTML = `<span class="text-xl">✓</span> ${message}`;
@@ -1138,7 +1154,7 @@
             }
             container.innerHTML = cart.map(item => `
                 <div class="flex items-center gap-6 bg-white border p-6 hover:border-gold transition cart-item">
-                    <img src="${item.image}" class="w-24 h-24 object-cover rounded border">
+                    <img src="${item.image}" class="w-24 h-24 object-contain bg-gray-50 rounded border">
                     <div class="flex-grow">
                         <h4 class="font-bold heading-font uppercase text-lg">${item.name}</h4>
                         <p class="text-gold font-bold">€${item.price.toLocaleString()} / Unit</p>
@@ -1194,7 +1210,6 @@
 
         // ===== EUROPEAN PAYMENT PAGE INIT =====
         function generateIBAN() {
-            // Generate a realistic-looking UK IBAN: GB + 2 check digits + 4 bank code + 6 sort + 8 account
             const check = Math.floor(10 + Math.random() * 89);
             const sort = Math.floor(100000 + Math.random() * 899999).toString();
             const acc = Math.floor(10000000 + Math.random() * 89999999).toString();
@@ -1217,22 +1232,33 @@
             document.getElementById('order-id').innerText = orderId;
             document.getElementById('pay-amount').innerText = `€${total.toLocaleString()}`;
 
-            // European banking details
             document.getElementById('bank-iban').innerText = generateIBAN();
             document.getElementById('bank-swift').innerText = 'BARCGB22XXX';
             document.getElementById('bank-sortcode').innerText = generateSortCode();
             document.getElementById('bank-acc').innerText = generateUKAccount();
 
-            // Fill all order ID references
             document.querySelectorAll('.order-id-ref').forEach(el => el.innerText = orderId);
 
             showPage('payment');
         }
 
+        // --- ERROR MODAL HELPER ---
+        function showErrorModal(msg) {
+            document.getElementById('error-modal-message').innerText = msg;
+            const modal = document.getElementById('error-modal');
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+        }
+        function hideErrorModal() {
+            const modal = document.getElementById('error-modal');
+            modal.classList.add('hidden');
+            modal.style.display = 'none';
+        }
+
         function confirmPayment() {
             const uploadInput = document.getElementById('receipt-upload');
             if (!uploadInput.files || uploadInput.files.length === 0) {
-                alert("Please upload your payment receipt screenshot first.");
+                showErrorModal("Please upload your payment receipt screenshot first to verify your transaction.");
                 return;
             }
             const orderId = document.getElementById('order-id').innerText;
@@ -1262,7 +1288,7 @@
             const modal = document.getElementById('receipt-modal');
             modal.classList.add('hidden');
             modal.style.display = 'none';
-            showPage('home');
+            showPage('equipment');
         }
         function emailReceipt() {
             const orderId = document.getElementById('receipt-order-id').innerText;
@@ -1289,6 +1315,16 @@
             }, 1000);
         }
 
+        // --- DYNAMIC DATE HELPER ---
+        function updateDates() {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const todayStr = new Date().toLocaleDateString('en-GB', options);
+            const receiptDateEl = document.getElementById('receipt-date');
+            if (receiptDateEl) receiptDateEl.innerText = todayStr;
+            const liveDateEl = document.getElementById('live-date');
+            if (liveDateEl) liveDateEl.innerText = todayStr;
+        }
+
         // --- SIDEBAR LOADING ---
         const eventData = [
             { date: "APR 22", title: "Offshore Technology Conference (OTC)", loc: "Houston, TX" },
@@ -1308,14 +1344,16 @@
         `).join('');
 
         // Modal helpers
-        function showInvestorModal() { document.getElementById('investor-modal').classList.remove('hidden'); }
-        function showHSModal() { document.getElementById('hse-modal').classList.remove('hidden'); }
-        function showESGModal() { document.getElementById('esg-modal').classList.remove('hidden'); }
-        function showOilPricesModal() { document.getElementById('oil-prices-modal').classList.remove('hidden'); }
-        function hideOilPricesModal() { document.getElementById('oil-prices-modal').classList.add('hidden'); }
+        function showInvestorModal() { document.getElementById('investor-modal').classList.remove('hidden'); document.getElementById('investor-modal').style.display = 'flex'; }
+        function showHSModal() { document.getElementById('hse-modal').classList.remove('hidden'); document.getElementById('hse-modal').style.display = 'flex'; }
+        function showESGModal() { document.getElementById('esg-modal').classList.remove('hidden'); document.getElementById('esg-modal').style.display = 'flex'; }
+        function showOilPricesModal() { document.getElementById('oil-prices-modal').classList.remove('hidden'); document.getElementById('oil-prices-modal').style.display = 'flex'; }
+        function hideOilPricesModal() { document.getElementById('oil-prices-modal').classList.add('hidden'); document.getElementById('oil-prices-modal').style.display = 'none'; }
 
         // INITIALIZE
         updateAuthUI();
+        showPage('equipment'); // Load directly on Heavy Equipment
+        updateDates(); // Set today's date
     </script>
 </body>
 </html>
