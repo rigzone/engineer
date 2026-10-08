@@ -371,6 +371,54 @@
                 text-align: center;
             }
         }
+        /* ===== MOBILE EDGE-TO-EDGE PRODUCT DISPLAY ===== */
+@media (max-width: 640px) {
+    #product-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        padding: 0 !important;
+    }
+    #product-grid > div {
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        width: 100% !important;
+    }
+    #product-grid > div .h-56 {
+        height: 200px !important;
+    }
+    #product-grid img {
+        max-height: 200px !important;
+        object-fit: contain !important;
+    }
+    #product-grid .p-6 {
+        padding: 16px !important;
+    }
+    #product-grid h3 {
+        font-size: 16px !important;
+        height: auto !important;
+        margin-bottom: 8px !important;
+    }
+    #product-grid .text-3xl {
+        font-size: 24px !important;
+        margin-bottom: 12px !important;
+    }
+    #product-grid .grid-cols-2 {
+        gap: 6px !important;
+    }
+    #product-grid .text-\[10px\] {
+        font-size: 11px !important;
+        padding: 10px 6px !important;
+    }
+    main.container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    main.container > section {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
     </style>
 </head>
 <body>
@@ -1013,11 +1061,14 @@
             { id: 28, name: "High Torque Drill Collar (Set)", price: 140000, category: "Tooling", image: "https://image.made-in-china.com/202f0j00TznbRrEqqCcG/Wa-T-Drill-Collar-Safety-Clamp-for-Well-Drilling-Oil-Drilling-Equipment.webp", specs: "Material: Non-Mag" },
             { id: 29, name: "Industrial Water Filtration Plant", price: 890000, category: "Maintenance", image: "https://i.pinimg.com/1200x/2e/00/55/2e00554b498707c4b691d86a52e55a54.jpg", specs: "OSHA Grade" },
             { id: 30, name: "Pulsar PDC Drill Bit - 6 Inch Range", price: 81000, category: "Tooling", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK0RnI9tt6HmvNBcLA9szy2PHBUAavSqZoig&s", specs: "Hard Rock Spec" },
-            { id: 31, name: "Massey Ferguson Heavy Duty Tractor", price: 110000, category: "Agriculture", image: "https://z-cdn-media.chatglm.cn/files/94e2b2d7-efc7-4084-8f60-c5c2aa1dafde.png?auth_key=1888687229-2a513b43d4a04ae0920fb5cd3e6a0827-0-f6248f1f1614bae1ae67b5f9101894ca", specs: "Engine: 150 HP | 4WD | Modern Cabin" }
+            { id: 31, name: "Massey Ferguson Heavy Duty Tractor", price: 110000, category: "Agriculture", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf8JK0DAqbrJqOTtves7IAEWDa0fIKCIJMYgJdMHlw3w&s=10", specs: "Engine: 150 HP | 4WD | Modern Cabin" },
+            { id: 32, name: "Manual Drilling Tongs / Torque Tongs", price: 3200, category: "Tooling", image: "https://smkst-petro.com/wp-content/uploads/2024/06/Manual-Tong.jpg", specs: "Type: Manual Torque Tongs | API Spec 7K Certified" },
+            { id: 33, name: "Stabbing Guides", price: 980, category: "Tooling", image: "https://s.alicdn.com/@sc04/kf/Hb2e213d42af641ea8a9a0b8eefd3e2abL.jpg", specs: "Type: Stabbing Guide | Heavy Duty Standard API" }
         ];
 
         let currentUser = JSON.parse(localStorage.getItem('rigzone_user')) || null;
         let cart = JSON.parse(localStorage.getItem('rigzone_cart')) || [];
+        let pendingAction = null; // Stores what user wanted to do before login
 
         // --- NAVIGATION ENGINE ---
         function showPage(pageId) {
@@ -1031,13 +1082,43 @@
 
         // --- AUTH & ACCOUNT ---
         function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            currentUser = { email: email, name: email.split('@')[0], company: "Global Engineering Corp" };
-            localStorage.setItem('rigzone_user', JSON.stringify(currentUser));
-            updateAuthUI();
-            showPage('home');
+    e.preventDefault();
+    const email = document.getElementById('login-email').value;
+    currentUser = { email: email, name: email.split('@')[0], company: "Global Engineering Corp" };
+    localStorage.setItem('rigzone_user', JSON.stringify(currentUser));
+    updateAuthUI();
+    
+    // Check if there was a pending action (Buy or Add to Cart)
+    if(pendingAction) {
+        const action = pendingAction;
+        pendingAction = null;
+        
+        if(action.type === 'buy') {
+            // User clicked "Buy Now" — go directly to checkout
+            cart = [];
+            const item = products.find(p => p.id === action.id);
+            if(item) cart.push({...item, qty: 1});
+            saveCart();
+            // Go directly to payment page
+            processToCheckout();
+        } else if(action.type === 'cart') {
+            // User clicked "Add to Cart" — add item and show cart at top
+            const item = products.find(p => p.id === action.id);
+            if(item) {
+                const exists = cart.find(c => c.id === action.id);
+                if(exists) exists.qty++;
+                else cart.push({...item, qty: 1});
+                saveCart();
+            }
+            // Show cart page at the top
+            showPage('cart');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            showNotification(`ASSET #${action.id} ADDED TO PROCUREMENT LIST`);
         }
+    } else {
+        showPage('home');
+    }
+}
         function logout() {
             currentUser = null;
             localStorage.removeItem('rigzone_user');
@@ -1131,20 +1212,51 @@
 
         // --- PROCUREMENT LOGIC ---
         function addToCart(id) {
-            if(!currentUser) return showPage('login');
-            const item = products.find(p => p.id === id);
-            const exists = cart.find(c => c.id === id);
-            if(exists) exists.qty++;
-            else cart.push({...item, qty: 1});
-            saveCart();
-            showNotification(`ASSET #${id} ADDED TO PROCUREMENT LIST`);
-        }
+    if(!currentUser) {
+        // Save what they wanted to do, then prompt login
+        pendingAction = { type: 'cart', id: id };
+        showPage('login');
+        // Show message on login page
+        setTimeout(() => {
+            const loginForm = document.getElementById('login-form');
+            if(loginForm) {
+                const msg = document.createElement('div');
+                msg.className = 'bg-yellow-50 border border-yellow-200 text-yellow-800 text-xs p-3 rounded mb-4 text-center';
+                msg.innerHTML = '<i class="fas fa-info-circle"></i> Please sign in to add this item to your cart';
+                loginForm.parentNode.insertBefore(msg, loginForm);
+            }
+        }, 100);
+        return;
+    }
+    const item = products.find(p => p.id === id);
+    const exists = cart.find(c => c.id === id);
+    if(exists) exists.qty++;
+    else cart.push({...item, qty: 1});
+    saveCart();
+    showNotification(`ASSET #${id} ADDED TO PROCUREMENT LIST`);
+}
         function directBuy(id) {
-            if(!currentUser) return showPage('login');
-            cart = [];
-            addToCart(id);
-            showPage('cart');
-        }
+    if(!currentUser) {
+        // Save what they wanted to do, then prompt login
+        pendingAction = { type: 'buy', id: id };
+        showPage('login');
+        // Show message on login page
+        setTimeout(() => {
+            const loginForm = document.getElementById('login-form');
+            if(loginForm) {
+                const msg = document.createElement('div');
+                msg.className = 'bg-yellow-50 border border-yellow-200 text-yellow-800 text-xs p-3 rounded mb-4 text-center';
+                msg.innerHTML = '<i class="fas fa-info-circle"></i> Please sign in to proceed with your purchase';
+                loginForm.parentNode.insertBefore(msg, loginForm);
+            }
+        }, 100);
+        return;
+    }
+    cart = [];
+    addToCart(id);
+    // Go directly to checkout/payment
+    processToCheckout();
+}
         function renderCart() {
             const container = document.getElementById('cart-items-container');
             if(cart.length === 0) {
